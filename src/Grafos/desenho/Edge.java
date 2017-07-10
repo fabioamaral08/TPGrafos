@@ -100,9 +100,9 @@ public class Edge {
         
         g2.setFont(new Font(Font.DIALOG,Font.PLAIN,20));
         g2.setColor(Color.BLACK);
-       // g2.rotate(Math.acos(cos), pc.x, pc.y);
+        //g2.rotate(Math.acos(cos), pc.x, pc.y);
         g2.drawString(text, pc.x, pc.y);
-       // g2.rotate(-Math.acos(cos), pc.x, pc.y);
+        //g2.rotate(-Math.acos(cos), pc.x, pc.y);
     }
 
     private void drawArrow(Graphics2D g2, Point s, Point t, float size) {

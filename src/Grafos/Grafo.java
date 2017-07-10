@@ -40,8 +40,4 @@ public class Grafo {
         ponderado = pond;
     }
     
-    public void nada(){
-    //alteração
-    }
-    
 }

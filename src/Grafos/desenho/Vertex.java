@@ -95,7 +95,7 @@ public class Vertex {
 
     private void drawText(Graphics2D g2, Point s, String text) {
         g2.setFont(new Font(Font.DIALOG, Font.PLAIN, 15));
-        if (this.ID == 0) {
+        if (this.color.equals(Color.BLACK)) {
             g2.setColor(Color.WHITE);
         } else {
             g2.setColor(Color.BLACK);
