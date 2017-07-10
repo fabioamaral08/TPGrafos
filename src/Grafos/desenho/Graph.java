@@ -20,6 +20,7 @@ public class Graph {
     protected boolean Oriented;
     
     public Graph(int nVert,int tipo) {
+        
         RainbowScale cS = new RainbowScale();
         //GrayScale cS = new GrayScale();
         int colorStep = 255 / nVert;

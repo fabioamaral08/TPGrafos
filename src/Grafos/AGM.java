@@ -10,12 +10,14 @@ package Grafos;
  * @author fabio
  */
 public class AGM {
+
     private int numVert;
-    
-    public void execute(Grafo g){
+
+    public void execute(Grafo g) {
         Representacao rep = g.getRepresentacao();
     }
-        public Grafo AGMPrimLista(Grafo g) {
+
+    public Grafo AGMPrimLista(Grafo g) {
         int[] valores = new int[this.numVert];
         No[] list = g.getRepresentacao()
         int fim, u, v, min, ind;
@@ -55,5 +57,16 @@ public class AGM {
         }
         return retArv(this.corAnt, this.numVert); //função que cria arvore a partir dos antecessores de um vertice;
     }
+    
+    public Grafo retArv(int[][] ant, int vert) {
+        Grafo graf = new Grafo(vert, 0, new ListaAdjacencia());
+
+        for (int i = 0; i < vert; i++) {
+            if (ant[i][1] != -1) { //se não for a raiz
+                graf.addAresta(i, ant[i][1]); //criar uma aresta entre o vertice e seu antecessor.
+            }
+
+        }
+        return graf;
     }
 }
