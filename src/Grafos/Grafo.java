@@ -39,4 +39,7 @@ public class Grafo {
     public static void setPonderado(boolean pond){
         ponderado = pond;
     }
+    
+    public void nada(){}
+    
 }
