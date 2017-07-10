@@ -98,9 +98,9 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="implement_Menu">
+        <Menu class="javax.swing.JMenu" name="aplic_Menu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Implementa&#xe7;&#xe3;o"/>
+            <Property name="text" type="java.lang.String" value="Aplica&#xe7;&#xe3;o"/>
           </Properties>
         </Menu>
       </SubComponents>

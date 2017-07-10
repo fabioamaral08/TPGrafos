@@ -79,7 +79,7 @@ public class View extends javax.swing.JFrame {
         buttonT = new javax.swing.JMenuItem();
         buttonOT = new javax.swing.JMenuItem();
         buttonBL = new javax.swing.JMenuItem();
-        implement_Menu = new javax.swing.JMenu();
+        aplic_Menu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -219,8 +219,8 @@ public class View extends javax.swing.JFrame {
 
         jMenuBar1.add(algoritmos_Menu);
 
-        implement_Menu.setText("Implementação");
-        jMenuBar1.add(implement_Menu);
+        aplic_Menu.setText("Aplicação");
+        jMenuBar1.add(aplic_Menu);
 
         setJMenuBar(jMenuBar1);
 
@@ -546,6 +546,7 @@ public class View extends javax.swing.JFrame {
     private Grafo grafo;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu algoritmos_Menu;
+    private javax.swing.JMenu aplic_Menu;
     private javax.swing.JMenuItem buttonAGM;
     private javax.swing.JMenuItem buttonBL;
     private javax.swing.JButton buttonBusca;
@@ -556,7 +557,6 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem buttonOT;
     private javax.swing.JMenuItem buttonT;
     private javax.swing.JMenuItem carregarGrafo_Menu;
-    private javax.swing.JMenu implement_Menu;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBusca;
