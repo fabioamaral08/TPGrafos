@@ -58,15 +58,38 @@ public class View extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane(this.view);
+        thePanel = new javax.swing.JPanel();
+        panelVazio = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         opcoes_Menu = new javax.swing.JMenu();
         carregarGrafo_Menu = new javax.swing.JMenuItem();
         salvarImagem_Menu = new javax.swing.JMenuItem();
         algoritmos_Menu = new javax.swing.JMenu();
-        componentesConexas_Menu = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        buttonCC = new javax.swing.JMenuItem();
+        buttonCor = new javax.swing.JMenuItem();
+        buttonAGM = new javax.swing.JMenuItem();
+        buttonCM = new javax.swing.JMenuItem();
+        buttonC = new javax.swing.JMenuItem();
+        buttonT = new javax.swing.JMenuItem();
+        buttonOT = new javax.swing.JMenuItem();
+        buttonBL = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        thePanel.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout panelVazioLayout = new javax.swing.GroupLayout(panelVazio);
+        panelVazio.setLayout(panelVazioLayout);
+        panelVazioLayout.setHorizontalGroup(
+            panelVazioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 690, Short.MAX_VALUE)
+        );
+        panelVazioLayout.setVerticalGroup(
+            panelVazioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        thePanel.add(panelVazio, "card2");
 
         opcoes_Menu.setText("Opções");
 
@@ -90,21 +113,49 @@ public class View extends javax.swing.JFrame {
 
         algoritmos_Menu.setText("Algoritmos");
 
-        componentesConexas_Menu.setText("Marcar Componentes Conexas");
-        componentesConexas_Menu.addActionListener(new java.awt.event.ActionListener() {
+        buttonCC.setText("Marcar Componentes Conexas");
+        buttonCC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                componentesConexas_MenuActionPerformed(evt);
+                buttonCCActionPerformed(evt);
             }
         });
-        algoritmos_Menu.add(componentesConexas_Menu);
+        algoritmos_Menu.add(buttonCC);
 
-        jMenuItem1.setText("Coloração");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        buttonCor.setText("Coloração");
+        buttonCor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                buttonCorActionPerformed(evt);
             }
         });
-        algoritmos_Menu.add(jMenuItem1);
+        algoritmos_Menu.add(buttonCor);
+
+        buttonAGM.setText("Árvore Geradora Mínima");
+        buttonAGM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAGMActionPerformed(evt);
+            }
+        });
+        algoritmos_Menu.add(buttonAGM);
+
+        buttonCM.setText("Caminho Mínimo");
+        algoritmos_Menu.add(buttonCM);
+
+        buttonC.setText("Conectividade");
+        buttonC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCActionPerformed(evt);
+            }
+        });
+        algoritmos_Menu.add(buttonC);
+
+        buttonT.setText("Transposição");
+        algoritmos_Menu.add(buttonT);
+
+        buttonOT.setText("Ordem Topológica");
+        algoritmos_Menu.add(buttonOT);
+
+        buttonBL.setText("Busca em Largura");
+        algoritmos_Menu.add(buttonBL);
 
         jMenuBar1.add(algoritmos_Menu);
 
@@ -115,11 +166,13 @@ public class View extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
+            .addComponent(thePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(73, Short.MAX_VALUE)
+                .addComponent(thePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -195,7 +248,7 @@ public class View extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_salvarImagem_MenuActionPerformed
 
-    private void componentesConexas_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_componentesConexas_MenuActionPerformed
+    private void buttonCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCCActionPerformed
         // TODO add your handling code here:
 
         ComponentesConexas componentesConexas = new ComponentesConexas();
@@ -210,9 +263,9 @@ public class View extends javax.swing.JFrame {
         }
         this.view.cleanImage();
         this.view.repaint();
-    }//GEN-LAST:event_componentesConexas_MenuActionPerformed
+    }//GEN-LAST:event_buttonCCActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void buttonCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCorActionPerformed
         // TODO add your handling code here:
         Coloracao coloracao = new Coloracao();
         coloracao.execute(grafo);
@@ -229,7 +282,15 @@ public class View extends javax.swing.JFrame {
         }
         this.view.cleanImage();
         this.view.repaint();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_buttonCorActionPerformed
+
+    private void buttonAGMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAGMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonAGMActionPerformed
+
+    private void buttonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonCActionPerformed
 
     public class ViewPanel extends JPanel {
 
@@ -392,12 +453,20 @@ public class View extends javax.swing.JFrame {
     private Grafo grafo;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu algoritmos_Menu;
+    private javax.swing.JMenuItem buttonAGM;
+    private javax.swing.JMenuItem buttonBL;
+    private javax.swing.JMenuItem buttonC;
+    private javax.swing.JMenuItem buttonCC;
+    private javax.swing.JMenuItem buttonCM;
+    private javax.swing.JMenuItem buttonCor;
+    private javax.swing.JMenuItem buttonOT;
+    private javax.swing.JMenuItem buttonT;
     private javax.swing.JMenuItem carregarGrafo_Menu;
-    private javax.swing.JMenuItem componentesConexas_Menu;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu opcoes_Menu;
+    private javax.swing.JPanel panelVazio;
     private javax.swing.JMenuItem salvarImagem_Menu;
+    private javax.swing.JPanel thePanel;
     // End of variables declaration//GEN-END:variables
 }
