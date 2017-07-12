@@ -9,12 +9,6 @@ package Grafos;
  *
  * @author fabio
  */
-
-
 public class Caminho {
-    
-void banana(){
-    
-}    
     
 }
