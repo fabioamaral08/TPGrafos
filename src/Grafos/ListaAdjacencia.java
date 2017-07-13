@@ -19,13 +19,17 @@ public class ListaAdjacencia extends Representacao {
         this.tipo = tipo;
     }
 
+    public No[] getLista() {
+        return this.listaVertices;
+    }
+
     @Override
-    public void addAresta(int vIni, int vFim) {
-        No novoNo = new No(vFim);
+    public void addAresta(int vIni, int vFim, int peso) {
+        No novoNo = new No(vFim, peso);
         novoNo.setProx(listaVertices[vIni]);
         listaVertices[vIni] = novoNo;
         if (this.tipo == 0) {
-            novoNo = new No(vIni);
+            novoNo = new No(vIni, peso);
             novoNo.setProx(listaVertices[vFim]);
             listaVertices[vFim] = novoNo;
         }
@@ -34,7 +38,18 @@ public class ListaAdjacencia extends Representacao {
     public No getAdjacentes(int vert) {
         return listaVertices[vert];
     }
-
+    
+    public int getVal(int v1, int v2){
+        No aux = this.listaVertices[v1];
+        while(aux != null){
+            if(aux.getVertID() == v2){
+                return aux.getPeso();
+            }
+            aux = aux.getProx();
+        }
+        return -1;
+    }
+    
     @Override
     public void imprimeRepresentacao(String mensagem) {
         System.out.println("=================================");

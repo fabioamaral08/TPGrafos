@@ -20,8 +20,8 @@ public class Grafo {
         this.representacao.init(numVert,tipo);
     }
 
-    public void addAresta(int vIni, int vFim){
-        representacao.addAresta(vIni, vFim);
+    public void addAresta(int vIni, int vFim, int peso){
+        representacao.addAresta(vIni, vFim, peso);
     }
 
     public Representacao getRepresentacao(){

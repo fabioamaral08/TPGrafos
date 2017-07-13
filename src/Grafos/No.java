@@ -14,8 +14,15 @@ package Grafos;
 public class No {
     private int vertID;
     private No prox;
+    private int peso;
 
-    public No(int vertID) {
+    public int getPeso() {
+        return peso;
+    }
+
+    
+    public No(int vertID,int peso) {
+        this.peso = peso;
         this.vertID = vertID;
         this.prox = null;
     }

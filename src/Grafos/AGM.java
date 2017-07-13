@@ -13,60 +13,57 @@ public class AGM {
 
     private int numVert;
 
-    public void execute(Grafo g) {
+    public int[] execute(Grafo g, int vert) {
+        this.numVert = g.getRepresentacao().getNumVertices();
         Representacao rep = g.getRepresentacao();
+        return AGMPrimLista(g,vert);
     }
 
-    public Grafo AGMPrimLista(Grafo g) {
-        int[] valores = new int[this.numVert];
-        No[] list = g.getRepresentacao()
-        int fim, u, v, min, ind;
-        limpaAux();     //Limpa cor/Antecessor
+    public int[] AGMPrimLista(Grafo g, int vert) {
+        int[] ant = new int[this.numVert];
+        int[] cor = new int[this.numVert];
+        int[] valor = new int[this.numVert];
+        int fim = this.numVert;
+        int atual = vert;
+        No[] list = ((ListaAdjacencia) g.getRepresentacao()).getLista();
         No aux;
-        for (int i = 0; i < this.numVert; i++) { //Inicializa vertice com o maximo (simulando infinito)
-            valores[i] = Integer.MAX_VALUE;
+        int id;
+        Representacao rep = g.getRepresentacao();
+        for (int i = 0; i < this.numVert; i++) {
+            ant[i] = -1;
+            cor[i] = 0;
+            valor[i] = Integer.MAX_VALUE;
         }
-        u = 0;  //vertice inicial
-        valores[u] = 0;
-        this.corAnt[u][0] = 1;
-        this.corAnt[u][1] = -1;
-        fim = this.numVert - 1; // condição de parada
-
-        while (fim >= 0) { //cada iteração visita um vetice. Quando todos foram visitados o loop termina.
-            aux = this.list[u].getProx();
-            while (aux != null) {   //Percorre as adjacências
-                v = aux.getVertice();
-                if (this.corAnt[v][0] == 0) {   //verifica se esse ja foi adicionado na solução;
-                    if (valores[v] > aux.getValor()) {  //Se não foi adicionado, verificar se o vertice atual oferece um custo menor do que o custo anterior desse vertice
-                        valores[v] = aux.getValor();    //Se o custo for melhor, atualizado o custo desse vertice
-                        this.corAnt[v][1] = u;          //E atualiza o vertice que gera esse custo menor
+        valor[atual] = 0;
+        while (fim > 0) {
+            cor[atual] = 1;
+            aux = list[atual];
+            while (aux != null) {
+                id = aux.getVertID();
+                if (cor[id] == 0) {
+                    if (valor[id] > aux.getPeso()) {    //O valor atual da adjacencia é maior que a adjacencia do atual com ele?
+                        valor[id] = aux.getPeso();
+                        ant[id] = atual;
                     }
                 }
                 aux = aux.getProx();
             }
-            this.corAnt[u][0] = 2;//Vertice como pertencete a solução
-            min = Integer.MAX_VALUE;
-            for (int i = 0; i < this.numVert; i++) {//verifica quais dos vertices que ainda não foram adicionados a solução tem o menor custo associado
-                if (this.corAnt[i][0] == 0 && valores[i] < min) {
-                    u = i;
-                    min = valores[i];
+            int min = Integer.MAX_VALUE;
+            int proxVert = -1;
+            for(int i = 0;i<this.numVert;i++){
+                if(cor[i] == 0){
+                    if(valor[i] < min){
+                        min = valor[i];
+                        proxVert = i;
+                    }
                 }
-            }//Ao final do loop, a variavel u tem o vertice que será adicionado no conjunto de soluções
-
-            fim--; //decrementa o numero de vertices que faltam adicionar
-        }
-        return retArv(this.corAnt, this.numVert); //função que cria arvore a partir dos antecessores de um vertice;
-    }
-    
-    public Grafo retArv(int[][] ant, int vert) {
-        Grafo graf = new Grafo(vert, 0, new ListaAdjacencia());
-
-        for (int i = 0; i < vert; i++) {
-            if (ant[i][1] != -1) { //se não for a raiz
-                graf.addAresta(i, ant[i][1]); //criar uma aresta entre o vertice e seu antecessor.
             }
-
+            atual = proxVert;
+            fim--;
         }
-        return graf;
+
+        return ant;
     }
+
+
 }

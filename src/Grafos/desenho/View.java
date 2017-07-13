@@ -10,10 +10,12 @@
  */
 package Grafos.desenho;
 
+import Grafos.AGM;
 import Grafos.Coloracao;
 import Grafos.ComponentesConexas;
 import Grafos.Grafo;
 import Grafos.ListaAdjacencia;
+import Grafos.Representacao;
 import Grafos.desenho.color.GrayScale;
 import Grafos.desenho.color.RainbowScale;
 import java.awt.CardLayout;
@@ -48,6 +50,22 @@ public class View extends javax.swing.JFrame {
         this.view = new ViewPanel();
         //this.view.setGraph(this.graph);
         initComponents();
+    }
+
+    private Graph geraGraph(Representacao rep, int[] ant) {
+        
+        int numvert = rep.getNumVertices();
+        Graph g = new Graph(numvert, 0);
+        for (int i = 0; i < numvert; i++) {
+            if(ant[i] != -1){
+                Vertex v1 = g.getVertex().get(i);
+                Vertex v2 = g.getVertex().get(ant[i]);
+                
+                g.addEdge(new Edge(v1,v2,rep.getVal(i,ant[i]),false));
+            }
+        }
+        
+        return g;
     }
 
     /**
@@ -102,6 +120,11 @@ public class View extends javax.swing.JFrame {
         panelBL.setBorder(javax.swing.BorderFactory.createTitledBorder("Busca em Largura"));
 
         buttonBusca.setText("Buscar");
+        buttonBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBuscaActionPerformed(evt);
+            }
+        });
 
         labelBusca.setText("Vértice Inicial:");
 
@@ -270,7 +293,7 @@ public class View extends javax.swing.JFrame {
                     int peso = Integer.parseInt(t1.nextToken().trim()); //Peso
                     Vertex vS = this.graph.getVertex().get(vIni);
                     Vertex vT = this.graph.getVertex().get(vFim);
-                    this.grafo.addAresta(vIni, vFim); //estrutura de dados
+                    this.grafo.addAresta(vIni, vFim, peso); //estrutura de dados
                     Edge e = new Edge(vS, vT, peso, this.graph.isOriented()); //desenho
 
                     this.graph.addEdge(e);    //desenho
@@ -278,6 +301,8 @@ public class View extends javax.swing.JFrame {
                 }  //se tiver peso nas arestas, adicionar mais uma leitura de token
 
                 this.view.setGraph(graph);
+               
+                this.backUpGraph = this.graph.clone();
 
             } catch (IOException ex) {
                 Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
@@ -312,9 +337,10 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_salvarImagem_MenuActionPerformed
 
     private void buttonCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCCActionPerformed
-        CardLayout card = (CardLayout)thePanel.getLayout();
+        CardLayout card = (CardLayout) thePanel.getLayout();
         card.show(thePanel, "cardVazio");
-
+        
+        graph = this.backUpGraph;
         ComponentesConexas componentesConexas = new ComponentesConexas();
         componentesConexas.execute(grafo);
         int comp[] = componentesConexas.getComponentes();
@@ -330,9 +356,11 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCCActionPerformed
 
     private void buttonCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCorActionPerformed
-        CardLayout card = (CardLayout)thePanel.getLayout();
+        CardLayout card = (CardLayout) thePanel.getLayout();
         card.show(thePanel, "cardVazio");
         
+        graph = this.backUpGraph;
+
         Coloracao coloracao = new Coloracao();
         coloracao.execute(grafo);
         int cores[] = coloracao.getCores();
@@ -352,38 +380,64 @@ public class View extends javax.swing.JFrame {
 
     private void buttonAGMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAGMActionPerformed
         panelBL.setBorder(BorderFactory.createTitledBorder("Árvore Geradora Mínima"));
-                
-        CardLayout card = (CardLayout)thePanel.getLayout();
-        card.show(thePanel, "cardBusca");
         
+       graph = this.backUpGraph;
+        this.view.cleanImage();
+        this.view.repaint();
+        
+        CardLayout card = (CardLayout) thePanel.getLayout();
+        card.show(thePanel, "cardBusca");
+   
+
     }//GEN-LAST:event_buttonAGMActionPerformed
 
     private void buttonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCActionPerformed
-        CardLayout card = (CardLayout)thePanel.getLayout();
+        CardLayout card = (CardLayout) thePanel.getLayout();
         card.show(thePanel, "cardVazio");
+        
+        
     }//GEN-LAST:event_buttonCActionPerformed
 
     private void buttonBLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBLActionPerformed
         panelBL.setBorder(BorderFactory.createTitledBorder("Busca em Largura"));
-        
-        CardLayout card = (CardLayout)thePanel.getLayout();
+
+        CardLayout card = (CardLayout) thePanel.getLayout();
         card.show(thePanel, "cardBusca");
     }//GEN-LAST:event_buttonBLActionPerformed
 
     private void buttonOTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOTActionPerformed
-        CardLayout card = (CardLayout)thePanel.getLayout();
+        CardLayout card = (CardLayout) thePanel.getLayout();
         card.show(thePanel, "cardVazio");
     }//GEN-LAST:event_buttonOTActionPerformed
 
     private void buttonTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTActionPerformed
-        CardLayout card = (CardLayout)thePanel.getLayout();
+        CardLayout card = (CardLayout) thePanel.getLayout();
         card.show(thePanel, "cardVazio");
     }//GEN-LAST:event_buttonTActionPerformed
 
     private void buttonCMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCMActionPerformed
-        CardLayout card = (CardLayout)thePanel.getLayout();
+        CardLayout card = (CardLayout) thePanel.getLayout();
         card.show(thePanel, "cardVazio");
     }//GEN-LAST:event_buttonCMActionPerformed
+
+    private void buttonBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscaActionPerformed
+        
+        AGM a = new AGM();
+        int vert;
+        try{
+            String opc = this.textFieldBusca.getText();
+            vert = Integer.valueOf(opc);
+            graph = geraGraph(grafo.getRepresentacao(),a.execute(grafo,vert));
+            
+        }catch(Exception e){
+            return;
+        }finally{
+        
+        
+        this.view.cleanImage();
+        this.view.repaint();
+        }
+    }//GEN-LAST:event_buttonBuscaActionPerformed
 
     public class ViewPanel extends JPanel {
 
@@ -544,6 +598,8 @@ public class View extends javax.swing.JFrame {
     private ViewPanel view;
     private Graph graph;
     private Grafo grafo;
+    private Graph backUpGraph;
+    private Grafo backUpGrafo;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu algoritmos_Menu;
     private javax.swing.JMenu aplic_Menu;

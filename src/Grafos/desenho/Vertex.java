@@ -49,7 +49,7 @@ public class Vertex {
                 - this.getRay(), this.getRay() * 2, this.getRay() * 2);
 
         g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 1.0f));
-        this.drawText(g2, new Point((int) this.x - 3, (int) this.y + 4), Integer.toString(ID));
+        this.drawText(g2, new Point((int) this.x - 4, (int) this.y + 4), Integer.toString(ID));
 
     }
 
@@ -101,6 +101,7 @@ public class Vertex {
             g2.setColor(Color.BLACK);
         }
         // g2.rotate(Math.acos(cos), pc.x, pc.y);
+        
         g2.drawString(text, s.x, s.y);
 
         // g2.rotate(-Math.acos(cos), pc.x, pc.y);

@@ -14,13 +14,14 @@ import java.util.ArrayList;
  *
  * @author Danilo Medeiros Eler
  */
-public class Graph {
+public class Graph extends Object implements Cloneable{
     protected ArrayList<Vertex> vertex = new ArrayList<Vertex>();
     protected ArrayList<Edge> edges = new ArrayList<Edge>();
     protected boolean Oriented;
+    protected int tipo;
     
     public Graph(int nVert,int tipo) {
-        
+        this.tipo = tipo;
         RainbowScale cS = new RainbowScale();
         //GrayScale cS = new GrayScale();
         int colorStep = 255 / nVert;
@@ -89,7 +90,7 @@ public class Graph {
     }
     
     
-
+    
     public ArrayList<Vertex> getVertex() {
         return this.vertex;
     }
@@ -138,5 +139,15 @@ public class Graph {
         } else {
             return new java.awt.Dimension(0, 0);
         }
-    }    
+    } 
+    
+    public Graph clone() {
+        Graph g = new Graph(this.vertex.size(),this.tipo);
+        g.edges = (ArrayList)this.edges.clone();
+        g.vertex = (ArrayList) this.vertex.clone();
+        g.Oriented = this.Oriented;
+        g.tipo = this.tipo;
+        return g;
+    }
+    
 }
