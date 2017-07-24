@@ -11,6 +11,7 @@
 package Grafos.desenho;
 
 import Grafos.AGM;
+import Grafos.BuscaLargura;
 import Grafos.Coloracao;
 import Grafos.ComponentesConexas;
 import Grafos.Grafo;
@@ -19,6 +20,7 @@ import Grafos.Representacao;
 import Grafos.Topologia;
 import Grafos.desenho.color.GrayScale;
 import Grafos.desenho.color.RainbowScale;
+import Maze.Lab;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -36,6 +38,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -112,6 +115,7 @@ public class View extends javax.swing.JFrame {
         buttonBL = new javax.swing.JMenuItem();
         aplic_Menu = new javax.swing.JMenu();
         mostraLab = new javax.swing.JMenuItem();
+        geraLab = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -181,6 +185,11 @@ public class View extends javax.swing.JFrame {
         lb_ySaidaMaze.setText("Y");
 
         bt_goMaze.setText("GO!!");
+        bt_goMaze.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_goMazeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout p_mazeLayout = new javax.swing.GroupLayout(p_maze);
         p_maze.setLayout(p_mazeLayout);
@@ -237,7 +246,7 @@ public class View extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        p_thePanel.add(p_maze, "card4");
+        p_thePanel.add(p_maze, "cardMaze");
 
         opcoes_Menu.setText("Opções");
 
@@ -346,6 +355,14 @@ public class View extends javax.swing.JFrame {
             }
         });
         aplic_Menu.add(mostraLab);
+
+        geraLab.setText("Gerar Labirinto");
+        geraLab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                geraLabActionPerformed(evt);
+            }
+        });
+        aplic_Menu.add(geraLab);
 
         jMenuBar1.add(aplic_Menu);
 
@@ -492,6 +509,24 @@ public class View extends javax.swing.JFrame {
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardBusca");
 
+        /*
+        Enfiado
+        
+        AGM a = new AGM();
+        int vert;
+        try {
+            String opc = this.textFieldBusca.getText();
+            vert = Integer.valueOf(opc);
+            graph = geraGraph(grafo.getRepresentacao(), a.execute(grafo, vert));
+
+        } catch (Exception e) {
+            return;
+        } finally {
+
+            this.view.cleanImage();
+            this.view.repaint();
+        }
+         */
 
     }//GEN-LAST:event_buttonAGMActionPerformed
 
@@ -507,6 +542,7 @@ public class View extends javax.swing.JFrame {
 
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardBusca");
+
     }//GEN-LAST:event_buttonBLActionPerformed
 
     private void buttonOTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOTActionPerformed
@@ -517,7 +553,7 @@ public class View extends javax.swing.JFrame {
 
         Topologia topsort = new Topologia();
         topsort.execute(grafo);
-        this.graph = new Graph(topsort.ordem, (ArrayList<Edge>) this.graph.getEdges().clone());
+        this.graph = new Graph(topsort.getOrdem(), (ArrayList<Edge>) this.graph.getEdges().clone());
 
         this.view.cleanImage();
         this.view.repaint();
@@ -537,20 +573,30 @@ public class View extends javax.swing.JFrame {
 
     private void buttonBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscaActionPerformed
 
-        AGM a = new AGM();
-        int vert;
+        int ini;
+        this.graph = this.backUpGraph.clone();
+        BuscaLargura busca = new BuscaLargura();
         try {
-            String opc = this.textFieldBusca.getText();
-            vert = Integer.valueOf(opc);
-            graph = geraGraph(grafo.getRepresentacao(), a.execute(grafo, vert));
-
-        } catch (Exception e) {
+            ini = Integer.valueOf(this.textFieldBusca.getText());
+            if (ini < 0 || ini >= this.grafo.getRepresentacao().getNumVertices()) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Numero Inválido");
             return;
-        } finally {
-
-            this.view.cleanImage();
-            this.view.repaint();
         }
+        busca.execute(grafo, ini);
+
+        int[] caminho = busca.getCaminho();
+
+        this.graph.buscaLargura(caminho);
+
+        this.view.setGraph(this.graph);
+        this.view.cleanImage();
+
+        this.view.repaint();
+
+
     }//GEN-LAST:event_buttonBuscaActionPerformed
 
     private void aplic_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplic_MenuActionPerformed
@@ -562,13 +608,64 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_aplic_MenuMouseClicked
 
     private void mostraLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostraLabActionPerformed
-        
-        this.graph.computeMazePosition(20);
-        
-        
+        CardLayout card = (CardLayout) p_thePanel.getLayout();
+        card.show(p_thePanel, "cardMaze");
+
+        this.col = Integer.valueOf(JOptionPane.showInputDialog(this, "Numero de colunas do labirinto:"));
+        this.graph.computeMazePosition(col);
+
         this.view.setGraph(this.graph);
         this.view.cleanImage();
+
         this.view.repaint();        this.view.repaint();    }//GEN-LAST:event_mostraLabActionPerformed
+
+    private void bt_goMazeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_goMazeActionPerformed
+        int xi, yi, xf, yf;
+        graph = this.backUpGraph.clone();
+        
+        graph.setApp(true);
+        try {
+            xi = Integer.valueOf(this.tf_xEntradaMaze.getText());
+            yi = Integer.valueOf(this.tf_yEntradaMaze.getText());
+
+            xf = Integer.valueOf(this.tf_xSaidaMaze.getText());
+            yf = Integer.valueOf(this.tf_ySaidaMaze.getText());
+
+            if (xi * col + yi > this.grafo.getRepresentacao().getNumVertices() || xf * col + yf > this.grafo.getRepresentacao().getNumVertices() || xi < 0 || yi < 0 || xf < 0 || yf < 0 || yi >= col || yf >= col) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Coordenadas Inválidas");
+            return;
+        }
+
+        BuscaLargura busca = new BuscaLargura();
+        int vi = (xi * col) + yi;
+        int vf = (xf * col) + yf;
+        busca.execute(grafo, vi);
+
+        graph.caminho(busca.getCaminho(), vi, vf);
+
+        this.view.setGraph(this.graph);
+        this.view.cleanImage();
+
+        this.view.repaint();
+    }//GEN-LAST:event_bt_goMazeActionPerformed
+
+    private void geraLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_geraLabActionPerformed
+       Lab maze;
+       
+       try{
+           int lin = Integer.valueOf(JOptionPane.showInputDialog("Numero de linhas:"));
+           int col = Integer.valueOf(JOptionPane.showInputDialog("Numero de colunas:"));
+           
+           maze = new Lab(lin,col);
+           
+           maze.gravaArq();
+       }catch(NumberFormatException e){
+           JOptionPane.showMessageDialog(this, "Numero Inválido");
+       }
+    }//GEN-LAST:event_geraLabActionPerformed
 
     public class ViewPanel extends JPanel {
 
@@ -737,6 +834,7 @@ public class View extends javax.swing.JFrame {
     private Graph backUpGraph;
     private Grafo backUpGrafo;
     private boolean topologia = false;
+    private int col;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu algoritmos_Menu;
     private javax.swing.JMenu aplic_Menu;
@@ -751,6 +849,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem buttonOT;
     private javax.swing.JMenuItem buttonT;
     private javax.swing.JMenuItem carregarGrafo_Menu;
+    private javax.swing.JMenuItem geraLab;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBusca;

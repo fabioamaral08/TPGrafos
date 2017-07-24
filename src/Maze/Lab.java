@@ -5,8 +5,13 @@
  */
 package Maze;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -144,5 +149,35 @@ public class Lab {
                 System.out.print((this.cells[i][j].getX()) + "," + this.cells[i][j].getY() + "  ");
             }
         }
+    }
+
+    public void gravaArq() {
+        int numVert = lin*col;
+        
+        String res = exibe();
+        JFileChooser dialog = new JFileChooser();
+        dialog.setMultiSelectionEnabled(false);
+        dialog.setDialogTitle("Save file");
+        //dialog.setCurrentDirectory(new File("D:\\DANILO\\UNESP\\2017\\Aulas\\Grafos"));
+        int result = dialog.showDialog(null, "Salvar");
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                String nomeArq = dialog.getSelectedFile().getAbsolutePath();
+                File arquivo2 = new File(nomeArq);//definindo o nome do local do arquivo
+
+                arquivo2.createNewFile();
+                /*ESCREVER*/
+                FileWriter fileW = new FileWriter(arquivo2);//arquivo para escrita
+                BufferedWriter buffW = new BufferedWriter(fileW);
+
+                buffW.write("1\r\n" + numVert + "\r\n" + res);
+
+                buffW.close();
+            } catch (IOException ex) {
+                return;
+            }
+        }
+
+        
     }
 }

@@ -51,7 +51,7 @@ public class Edge {
         this.directed = directed;
     }
 
-    public void draw(java.awt.Graphics2D g2,boolean texto) {
+    public void draw(java.awt.Graphics2D g2, boolean texto) {
         //Combines the color of the two vertex to paint the edge
 
         if (selected) {
@@ -65,11 +65,14 @@ public class Edge {
                 g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 0.2f));
             }
         }
+        if (!texto && this.selected) {
+            this.color = Color.RED;
 
-        this.color = new Color((this.source.getColor().getRed() + this.target.getColor().getRed()) / 2,
-                (this.source.getColor().getGreen() + this.target.getColor().getGreen()) / 2,
-                (this.source.getColor().getBlue() + this.target.getColor().getBlue()) / 2);
-
+        } else {
+            this.color = new Color((this.source.getColor().getRed() + this.target.getColor().getRed()) / 2,
+                    (this.source.getColor().getGreen() + this.target.getColor().getGreen()) / 2,
+                    (this.source.getColor().getBlue() + this.target.getColor().getBlue()) / 2);
+        }
         g2.setColor(this.color);
 
         g2.drawLine(((int) this.source.getX()), ((int) this.source.getY()),
@@ -86,10 +89,10 @@ public class Edge {
                     6, 14);
 
         }
-        if(texto){
-        drawText(g2, new Point((int) source.getX(), (int) source.getY()),
-                new Point((int) target.getX(), (int) target.getY()),
-                Integer.toString(this.peso), 80);
+        if (texto && this.peso != 0) {
+            drawText(g2, new Point((int) source.getX(), (int) source.getY()),
+                    new Point((int) target.getX(), (int) target.getY()),
+                    Integer.toString(this.peso), 80);
         }
 
         g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 1.0f));
@@ -134,14 +137,13 @@ public class Edge {
 //                    6, 14);
 //
 //        }
-    
         g2.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
         g2.setColor(Color.BLACK);
         if (inter == 1) {
             System.out.println(Integer.toString(this.peso));
             g2.drawString(Integer.toString(this.peso), (int) (source.getX() + target.getX()) / 2, (int) source.getY() - (50));
         } else {
-            g2.drawString(Integer.toString(this.peso), (int) (source.getX() + target.getX()) / 2, (int) source.getY()+50 );
+            g2.drawString(Integer.toString(this.peso), (int) (source.getX() + target.getX()) / 2, (int) source.getY() + 50);
         }
 
         g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 1.0f));
