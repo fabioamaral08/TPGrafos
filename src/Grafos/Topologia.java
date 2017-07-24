@@ -11,10 +11,20 @@ package Grafos;
  */
 public class Topologia {
 
-    public int[] ordem;
-    public int topo;
-    int[] cor;
+    private int[] ordem;
+    private int topo;
+    private int[] cor;
 
+    public int[] getOrdem() {
+        return ordem;
+    }
+
+    public int getTopo() {
+        return topo;
+    }
+    
+    
+    
     public void execute(Grafo g) {
         buscaProf(g.getRepresentacao());
 
