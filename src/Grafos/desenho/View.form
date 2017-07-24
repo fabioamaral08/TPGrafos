@@ -115,6 +115,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mostraLabActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="geraLab">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Gerar Labirinto"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="geraLabActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>
@@ -255,7 +263,7 @@
         <Container class="javax.swing.JPanel" name="p_maze">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="card4"/>
+              <CardConstraints cardName="cardMaze"/>
             </Constraint>
           </Constraints>
 
@@ -368,6 +376,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="GO!!"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_goMazeActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
