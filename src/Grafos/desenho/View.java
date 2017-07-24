@@ -79,12 +79,24 @@ public class View extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane(this.view);
-        thePanel = new javax.swing.JPanel();
-        panelVazio = new javax.swing.JPanel();
-        panelBL = new javax.swing.JPanel();
+        p_thePanel = new javax.swing.JPanel();
+        p_Vazio = new javax.swing.JPanel();
+        p_buscaLargura = new javax.swing.JPanel();
         buttonBusca = new javax.swing.JButton();
         textFieldBusca = new javax.swing.JTextField();
         labelBusca = new javax.swing.JLabel();
+        p_maze = new javax.swing.JPanel();
+        lb_entradaMaze = new javax.swing.JLabel();
+        lb_saidaMaze = new javax.swing.JLabel();
+        lb_xEntradaMaze = new javax.swing.JLabel();
+        lb_yEntradaMaze = new javax.swing.JLabel();
+        tf_xEntradaMaze = new javax.swing.JTextField();
+        tf_yEntradaMaze = new javax.swing.JTextField();
+        lb_xSaidaMaze = new javax.swing.JLabel();
+        tf_xSaidaMaze = new javax.swing.JTextField();
+        lb_ySaidaMaze = new javax.swing.JLabel();
+        tf_ySaidaMaze = new javax.swing.JTextField();
+        bt_goMaze = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         opcoes_Menu = new javax.swing.JMenu();
         carregarGrafo_Menu = new javax.swing.JMenuItem();
@@ -103,23 +115,23 @@ public class View extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        thePanel.setLayout(new java.awt.CardLayout());
+        p_thePanel.setLayout(new java.awt.CardLayout());
 
-        javax.swing.GroupLayout panelVazioLayout = new javax.swing.GroupLayout(panelVazio);
-        panelVazio.setLayout(panelVazioLayout);
-        panelVazioLayout.setHorizontalGroup(
-            panelVazioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 690, Short.MAX_VALUE)
+        javax.swing.GroupLayout p_VazioLayout = new javax.swing.GroupLayout(p_Vazio);
+        p_Vazio.setLayout(p_VazioLayout);
+        p_VazioLayout.setHorizontalGroup(
+            p_VazioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 698, Short.MAX_VALUE)
         );
-        panelVazioLayout.setVerticalGroup(
-            panelVazioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 123, Short.MAX_VALUE)
+        p_VazioLayout.setVerticalGroup(
+            p_VazioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 131, Short.MAX_VALUE)
         );
 
-        thePanel.add(panelVazio, "cardVazio");
-        panelVazio.getAccessibleContext().setAccessibleName("");
+        p_thePanel.add(p_Vazio, "cardVazio");
+        p_Vazio.getAccessibleContext().setAccessibleName("");
 
-        panelBL.setBorder(javax.swing.BorderFactory.createTitledBorder("Busca em Largura"));
+        p_buscaLargura.setBorder(javax.swing.BorderFactory.createTitledBorder("Busca em Largura"));
 
         buttonBusca.setText("Buscar");
         buttonBusca.addActionListener(new java.awt.event.ActionListener() {
@@ -130,31 +142,102 @@ public class View extends javax.swing.JFrame {
 
         labelBusca.setText("Vértice Inicial:");
 
-        javax.swing.GroupLayout panelBLLayout = new javax.swing.GroupLayout(panelBL);
-        panelBL.setLayout(panelBLLayout);
-        panelBLLayout.setHorizontalGroup(
-            panelBLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBLLayout.createSequentialGroup()
+        javax.swing.GroupLayout p_buscaLarguraLayout = new javax.swing.GroupLayout(p_buscaLargura);
+        p_buscaLargura.setLayout(p_buscaLarguraLayout);
+        p_buscaLarguraLayout.setHorizontalGroup(
+            p_buscaLarguraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_buscaLarguraLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(labelBusca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 349, Short.MAX_VALUE)
                 .addComponent(buttonBusca)
                 .addGap(60, 60, 60))
         );
-        panelBLLayout.setVerticalGroup(
-            panelBLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBLLayout.createSequentialGroup()
+        p_buscaLarguraLayout.setVerticalGroup(
+            p_buscaLarguraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(p_buscaLarguraLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(panelBLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(p_buscaLarguraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelBusca))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
-        thePanel.add(panelBL, "cardBusca");
+        p_thePanel.add(p_buscaLargura, "cardBusca");
+
+        lb_entradaMaze.setText("Entrada:");
+
+        lb_saidaMaze.setText("Saída:");
+
+        lb_xEntradaMaze.setText("X");
+
+        lb_yEntradaMaze.setText("Y");
+
+        lb_xSaidaMaze.setText("X");
+
+        lb_ySaidaMaze.setText("Y");
+
+        bt_goMaze.setText("GO!!");
+
+        javax.swing.GroupLayout p_mazeLayout = new javax.swing.GroupLayout(p_maze);
+        p_maze.setLayout(p_mazeLayout);
+        p_mazeLayout.setHorizontalGroup(
+            p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(p_mazeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(p_mazeLayout.createSequentialGroup()
+                        .addGroup(p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lb_entradaMaze)
+                            .addGroup(p_mazeLayout.createSequentialGroup()
+                                .addComponent(lb_xEntradaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_xEntradaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lb_yEntradaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_yEntradaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lb_saidaMaze)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_mazeLayout.createSequentialGroup()
+                        .addComponent(lb_xSaidaMaze)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_xSaidaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lb_ySaidaMaze)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tf_ySaidaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 481, Short.MAX_VALUE)
+                .addComponent(bt_goMaze)
+                .addGap(56, 56, 56))
+        );
+        p_mazeLayout.setVerticalGroup(
+            p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(p_mazeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lb_entradaMaze)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_xEntradaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_yEntradaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_xEntradaMaze)
+                    .addComponent(lb_yEntradaMaze))
+                .addGap(18, 18, 18)
+                .addGroup(p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_saidaMaze)
+                    .addComponent(bt_goMaze))
+                .addGap(4, 4, 4)
+                .addGroup(p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_xSaidaMaze)
+                    .addComponent(tf_xSaidaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_ySaidaMaze)
+                    .addComponent(tf_ySaidaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        p_thePanel.add(p_maze, "card4");
 
         opcoes_Menu.setText("Opções");
 
@@ -273,12 +356,12 @@ public class View extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
-            .addComponent(thePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(p_thePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(thePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(p_thePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -358,8 +441,8 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_salvarImagem_MenuActionPerformed
 
     private void buttonCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCCActionPerformed
-        CardLayout card = (CardLayout) thePanel.getLayout();
-        card.show(thePanel, "cardVazio");
+        CardLayout card = (CardLayout) p_thePanel.getLayout();
+        card.show(p_thePanel, "cardVazio");
 
         graph = this.backUpGraph;
         ComponentesConexas componentesConexas = new ComponentesConexas();
@@ -377,8 +460,8 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCCActionPerformed
 
     private void buttonCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCorActionPerformed
-        CardLayout card = (CardLayout) thePanel.getLayout();
-        card.show(thePanel, "cardVazio");
+        CardLayout card = (CardLayout) p_thePanel.getLayout();
+        card.show(p_thePanel, "cardVazio");
 
         graph = this.backUpGraph;
 
@@ -400,35 +483,35 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCorActionPerformed
 
     private void buttonAGMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAGMActionPerformed
-        panelBL.setBorder(BorderFactory.createTitledBorder("Árvore Geradora Mínima"));
+        p_buscaLargura.setBorder(BorderFactory.createTitledBorder("Árvore Geradora Mínima"));
 
         graph = this.backUpGraph;
         this.view.cleanImage();
         this.view.repaint();
 
-        CardLayout card = (CardLayout) thePanel.getLayout();
-        card.show(thePanel, "cardBusca");
+        CardLayout card = (CardLayout) p_thePanel.getLayout();
+        card.show(p_thePanel, "cardBusca");
 
 
     }//GEN-LAST:event_buttonAGMActionPerformed
 
     private void buttonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCActionPerformed
-        CardLayout card = (CardLayout) thePanel.getLayout();
-        card.show(thePanel, "cardVazio");
+        CardLayout card = (CardLayout) p_thePanel.getLayout();
+        card.show(p_thePanel, "cardVazio");
 
 
     }//GEN-LAST:event_buttonCActionPerformed
 
     private void buttonBLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBLActionPerformed
-        panelBL.setBorder(BorderFactory.createTitledBorder("Busca em Largura"));
+        p_buscaLargura.setBorder(BorderFactory.createTitledBorder("Busca em Largura"));
 
-        CardLayout card = (CardLayout) thePanel.getLayout();
-        card.show(thePanel, "cardBusca");
+        CardLayout card = (CardLayout) p_thePanel.getLayout();
+        card.show(p_thePanel, "cardBusca");
     }//GEN-LAST:event_buttonBLActionPerformed
 
     private void buttonOTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOTActionPerformed
-        CardLayout card = (CardLayout) thePanel.getLayout();
-        card.show(thePanel, "cardVazio");
+        CardLayout card = (CardLayout) p_thePanel.getLayout();
+        card.show(p_thePanel, "cardVazio");
 
         this.topologia = true;
 
@@ -443,13 +526,13 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonOTActionPerformed
 
     private void buttonTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTActionPerformed
-        CardLayout card = (CardLayout) thePanel.getLayout();
-        card.show(thePanel, "cardVazio");
+        CardLayout card = (CardLayout) p_thePanel.getLayout();
+        card.show(p_thePanel, "cardVazio");
     }//GEN-LAST:event_buttonTActionPerformed
 
     private void buttonCMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCMActionPerformed
-        CardLayout card = (CardLayout) thePanel.getLayout();
-        card.show(thePanel, "cardVazio");
+        CardLayout card = (CardLayout) p_thePanel.getLayout();
+        card.show(p_thePanel, "cardVazio");
     }//GEN-LAST:event_buttonCMActionPerformed
 
     private void buttonBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscaActionPerformed
@@ -657,6 +740,7 @@ public class View extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu algoritmos_Menu;
     private javax.swing.JMenu aplic_Menu;
+    private javax.swing.JButton bt_goMaze;
     private javax.swing.JMenuItem buttonAGM;
     private javax.swing.JMenuItem buttonBL;
     private javax.swing.JButton buttonBusca;
@@ -670,12 +754,23 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBusca;
+    private javax.swing.JLabel lb_entradaMaze;
+    private javax.swing.JLabel lb_saidaMaze;
+    private javax.swing.JLabel lb_xEntradaMaze;
+    private javax.swing.JLabel lb_xSaidaMaze;
+    private javax.swing.JLabel lb_yEntradaMaze;
+    private javax.swing.JLabel lb_ySaidaMaze;
     private javax.swing.JMenuItem mostraLab;
     private javax.swing.JMenu opcoes_Menu;
-    private javax.swing.JPanel panelBL;
-    private javax.swing.JPanel panelVazio;
+    private javax.swing.JPanel p_Vazio;
+    private javax.swing.JPanel p_buscaLargura;
+    private javax.swing.JPanel p_maze;
+    private javax.swing.JPanel p_thePanel;
     private javax.swing.JMenuItem salvarImagem_Menu;
     private javax.swing.JTextField textFieldBusca;
-    private javax.swing.JPanel thePanel;
+    private javax.swing.JTextField tf_xEntradaMaze;
+    private javax.swing.JTextField tf_xSaidaMaze;
+    private javax.swing.JTextField tf_yEntradaMaze;
+    private javax.swing.JTextField tf_ySaidaMaze;
     // End of variables declaration//GEN-END:variables
 }
