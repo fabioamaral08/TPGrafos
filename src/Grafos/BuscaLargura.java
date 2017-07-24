@@ -10,56 +10,54 @@ package Grafos;
  * @author fabio
  */
 public class BuscaLargura {
-    private int[][] caminho;
-    private int[] tempo;
 
-    public int[][] getCaminho() {
+    private int[] caminho;
+    private int[] tempo;
+    private int[] fila;
+
+    public int[] getCaminho() {
         return caminho;
     }
 
     public int[] getTempo() {
         return tempo;
     }
-    
-    
-    
-    public void execute(Grafo g, int ini, int fim) {
+
+    public void execute(Grafo g, int ini) {
         Representacao rep = g.getRepresentacao();
         int numVert = rep.getNumVertices();
-        
-
-    }
-
-    public void buscaLarguraLista(int ini, int numVert, No[] list) {
-        caminho = new int[numVert][2];
-        tempo = new int[numVert];
-        int[] fila = new int[numVert];
-        int topo, prox, vertAux, ant;
-        No aux;
-
+        this.fila = new int[numVert];
+        this.caminho = new int[numVert];
+        this.tempo = new int[numVert];
+        int cor[] = new int[numVert];
+        int topo = 1;
+        int atual = 0;
         fila[0] = ini;
-        topo = 0;
-        prox = 1;
-        caminho[ini][0] = 1;
-        caminho[ini][0] = -1;
-        tempo[0] = 0;
 
-        while (topo != prox) {
-            ant = fila[topo];
-            aux = list[fila[topo]].getProx();
+        for (int i = 0; i < numVert; i++) {
+            cor[i] = 0;
+            this.caminho[i] = -1;
+        }
+        No aux;
+        int ID;
+        tempo[fila[0]] = 0;
+        cor[fila[0]] = 1;
+        while (topo != atual) {
+            aux = rep.getAdj(fila[atual]);
             while (aux != null) {
-                vertAux = aux.getVertID();
-                if (caminho[vertAux][0] == 0) {
-                    fila[prox] = vertAux;
-                    prox++;
-                    caminho[vertAux][0] = 1;
-                    caminho[vertAux][1] = ant;
-                    tempo[vertAux] = tempo[ant] + 1;
+                ID = aux.getVertID();
+                if (cor[ID] == 0) {
+                    this.tempo[ID] = tempo[fila[atual]] + 1;
+                    this.fila[topo] = ID;
+                    this.caminho[ID] = fila[atual];
+                    cor[ID]++;
+                    topo++;
                 }
                 aux = aux.getProx();
             }
-            topo++;
+            atual++;
         }
 
     }
+
 }
