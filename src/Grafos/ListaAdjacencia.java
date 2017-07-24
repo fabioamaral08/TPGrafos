@@ -66,4 +66,9 @@ public class ListaAdjacencia extends Representacao {
         }
     }
 
+    @Override
+    public No getAdj(int vert) {
+        return this.listaVertices[vert];
+    }
+
 }

@@ -18,8 +18,14 @@ public class Graph extends Object implements Cloneable{
     protected ArrayList<Vertex> vertex = new ArrayList<Vertex>();
     protected ArrayList<Edge> edges = new ArrayList<Edge>();
     protected boolean Oriented;
+    protected boolean app;
     protected int tipo;
-    
+    protected int[] pos;
+
+    public ArrayList<Edge> getEdges() {
+        return edges;
+    }
+   
     public Graph(int nVert,int tipo) {
         this.tipo = tipo;
         RainbowScale cS = new RainbowScale();
@@ -43,6 +49,41 @@ public class Graph extends Object implements Cloneable{
             }
         computeCircledPosition(150);
         //computeLinePosition();
+    }
+    
+    public Graph(int[] ordem, ArrayList<Edge> arestas){
+        RainbowScale cS = new RainbowScale();
+        this.pos = new int[ordem.length];
+        int colorStep = 255 / ordem.length;
+        for(int i = 0; i < ordem.length;i++){
+            pos[ordem[i]] = i;
+            Vertex novo = new Vertex();
+            novo.setID(ordem[i]);
+            novo.setColor(cS.getColor(i*colorStep));
+            this.vertex.add(novo);
+        }
+        
+        for(Edge e: arestas){
+            Vertex v1 = e.getSource();
+            Vertex v2 = e.getTarget();
+            int cont  = 0;
+            for(Vertex v: this.vertex){
+                if(v.getID() == v1.getID()){
+                    v1 = v;
+                    cont++;
+                }
+                
+                if(v.getID() == v2.getID()){
+                    v2 = v;
+                    cont++;
+                }
+                if (cont == 2) break;
+            }
+            Edge nova = new Edge(v1,v2,e.getPeso(),true);
+            this.edges.add(nova);
+        }
+     
+        computeLinePosition();
     }
 
     public void addVertex(Vertex v){
@@ -72,7 +113,7 @@ public class Graph extends Object implements Cloneable{
     
     public void computeLinePosition(){
         int nVert = this.vertex.size();
-        int step = 1000 / nVert;
+        int step = 100;
         int deslocX = 50;
         int deslocY = 100;
         for (int i=0; i<nVert; i++){
@@ -85,12 +126,39 @@ public class Graph extends Object implements Cloneable{
             this.vertex.get(i).setY(Y);
         }
     }
+    
+    public void computeMazePosition( int col){
+        this.app = true;
+        int nVert = this.vertex.size();
+        int step = 50;
+        int deslocX = 50;
+        int deslocY = 50;
+        int count = 0;
+        double pos = 50;
+        for (int i=0; i<nVert; i++){
+             pos += step;
+            
+            float X = (float) pos + deslocX;
+            float Y = (float) deslocY;
+            
+            this.vertex.get(i).setX(X);
+            this.vertex.get(i).setY(Y);
+            count++;
+            if(count >= col){
+                count = 0;
+                deslocY += 50;
+                pos = 50;
+            }
+        }
+        for(Edge e : edges){
+            e.setDirected(false);
+        }
+    }
+    
     public boolean isOriented() {
         return Oriented;
     }
-    
-    
-    
+   
     public ArrayList<Vertex> getVertex() {
         return this.vertex;
     }
@@ -98,11 +166,24 @@ public class Graph extends Object implements Cloneable{
     public void draw(java.awt.Graphics2D g2) {
        //Draw each edges of the graph
         for (Edge edge : edges) {
-            edge.draw(g2);
+            edge.draw(g2,!this.app);
         }
         //Draw each vertice of the graph
         for (Vertex v : this.vertex) {
-            v.draw(g2);
+            v.draw(g2,!this.app);
+        }
+    }
+    
+    public void drawTopo(java.awt.Graphics2D g2) {
+       //Draw each edges of the graph
+       int inter = 1;
+        for (Edge edge : edges) {
+            edge.drawTopo(g2,inter);
+            inter *=(-1);
+        }
+        //Draw each vertice of the graph
+        for (Vertex v : this.vertex) {
+            v.draw(g2,!app);
         }
     }
 

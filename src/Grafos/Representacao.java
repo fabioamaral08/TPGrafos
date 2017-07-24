@@ -20,4 +20,5 @@ public abstract class Representacao {
     public abstract void addAresta(int vIni, int vFim,int peso);
     public abstract void imprimeRepresentacao(String mensagem);
     public abstract int getVal(int v1,int v2);
+    public abstract No getAdj(int vert);
 }

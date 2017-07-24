@@ -16,6 +16,7 @@ import Grafos.ComponentesConexas;
 import Grafos.Grafo;
 import Grafos.ListaAdjacencia;
 import Grafos.Representacao;
+import Grafos.Topologia;
 import Grafos.desenho.color.GrayScale;
 import Grafos.desenho.color.RainbowScale;
 import java.awt.CardLayout;
@@ -53,18 +54,18 @@ public class View extends javax.swing.JFrame {
     }
 
     private Graph geraGraph(Representacao rep, int[] ant) {
-        
+
         int numvert = rep.getNumVertices();
         Graph g = new Graph(numvert, 0);
         for (int i = 0; i < numvert; i++) {
-            if(ant[i] != -1){
+            if (ant[i] != -1) {
                 Vertex v1 = g.getVertex().get(i);
                 Vertex v2 = g.getVertex().get(ant[i]);
-                
-                g.addEdge(new Edge(v1,v2,rep.getVal(i,ant[i]),false));
+
+                g.addEdge(new Edge(v1, v2, rep.getVal(i, ant[i]), false));
             }
         }
-        
+
         return g;
     }
 
@@ -98,6 +99,7 @@ public class View extends javax.swing.JFrame {
         buttonOT = new javax.swing.JMenuItem();
         buttonBL = new javax.swing.JMenuItem();
         aplic_Menu = new javax.swing.JMenu();
+        mostraLab = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -243,6 +245,25 @@ public class View extends javax.swing.JFrame {
         jMenuBar1.add(algoritmos_Menu);
 
         aplic_Menu.setText("Aplicação");
+        aplic_Menu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                aplic_MenuMouseClicked(evt);
+            }
+        });
+        aplic_Menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aplic_MenuActionPerformed(evt);
+            }
+        });
+
+        mostraLab.setText("Labirinto");
+        mostraLab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostraLabActionPerformed(evt);
+            }
+        });
+        aplic_Menu.add(mostraLab);
+
         jMenuBar1.add(aplic_Menu);
 
         setJMenuBar(jMenuBar1);
@@ -267,7 +288,7 @@ public class View extends javax.swing.JFrame {
 
     private void carregarGrafo_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carregarGrafo_MenuActionPerformed
         // TODO add your handling code here:
-        JFileChooser fc = new JFileChooser("E:\\DANILO\\UNESP\\2016\\Aulas\\GRAFOS\\Trabalho02");
+        JFileChooser fc = new JFileChooser("C:\\Users\\fabio\\Desktop\\Aulas\\Grafos\\arq");
         int result;
         result = fc.showOpenDialog(null);
         if (result == javax.swing.JFileChooser.APPROVE_OPTION) {
@@ -301,7 +322,7 @@ public class View extends javax.swing.JFrame {
                 }  //se tiver peso nas arestas, adicionar mais uma leitura de token
 
                 this.view.setGraph(graph);
-               
+
                 this.backUpGraph = this.graph.clone();
 
             } catch (IOException ex) {
@@ -339,7 +360,7 @@ public class View extends javax.swing.JFrame {
     private void buttonCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCCActionPerformed
         CardLayout card = (CardLayout) thePanel.getLayout();
         card.show(thePanel, "cardVazio");
-        
+
         graph = this.backUpGraph;
         ComponentesConexas componentesConexas = new ComponentesConexas();
         componentesConexas.execute(grafo);
@@ -358,7 +379,7 @@ public class View extends javax.swing.JFrame {
     private void buttonCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCorActionPerformed
         CardLayout card = (CardLayout) thePanel.getLayout();
         card.show(thePanel, "cardVazio");
-        
+
         graph = this.backUpGraph;
 
         Coloracao coloracao = new Coloracao();
@@ -380,22 +401,22 @@ public class View extends javax.swing.JFrame {
 
     private void buttonAGMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAGMActionPerformed
         panelBL.setBorder(BorderFactory.createTitledBorder("Árvore Geradora Mínima"));
-        
-       graph = this.backUpGraph;
+
+        graph = this.backUpGraph;
         this.view.cleanImage();
         this.view.repaint();
-        
+
         CardLayout card = (CardLayout) thePanel.getLayout();
         card.show(thePanel, "cardBusca");
-   
+
 
     }//GEN-LAST:event_buttonAGMActionPerformed
 
     private void buttonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCActionPerformed
         CardLayout card = (CardLayout) thePanel.getLayout();
         card.show(thePanel, "cardVazio");
-        
-        
+
+
     }//GEN-LAST:event_buttonCActionPerformed
 
     private void buttonBLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBLActionPerformed
@@ -408,6 +429,17 @@ public class View extends javax.swing.JFrame {
     private void buttonOTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOTActionPerformed
         CardLayout card = (CardLayout) thePanel.getLayout();
         card.show(thePanel, "cardVazio");
+
+        this.topologia = true;
+
+        Topologia topsort = new Topologia();
+        topsort.execute(grafo);
+        this.graph = new Graph(topsort.ordem, (ArrayList<Edge>) this.graph.getEdges().clone());
+
+        this.view.cleanImage();
+        this.view.repaint();
+
+
     }//GEN-LAST:event_buttonOTActionPerformed
 
     private void buttonTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTActionPerformed
@@ -421,23 +453,39 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCMActionPerformed
 
     private void buttonBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscaActionPerformed
-        
+
         AGM a = new AGM();
         int vert;
-        try{
+        try {
             String opc = this.textFieldBusca.getText();
             vert = Integer.valueOf(opc);
-            graph = geraGraph(grafo.getRepresentacao(),a.execute(grafo,vert));
-            
-        }catch(Exception e){
+            graph = geraGraph(grafo.getRepresentacao(), a.execute(grafo, vert));
+
+        } catch (Exception e) {
             return;
-        }finally{
-        
-        
-        this.view.cleanImage();
-        this.view.repaint();
+        } finally {
+
+            this.view.cleanImage();
+            this.view.repaint();
         }
     }//GEN-LAST:event_buttonBuscaActionPerformed
+
+    private void aplic_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplic_MenuActionPerformed
+
+    }//GEN-LAST:event_aplic_MenuActionPerformed
+
+    private void aplic_MenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aplic_MenuMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aplic_MenuMouseClicked
+
+    private void mostraLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostraLabActionPerformed
+        
+        this.graph.computeMazePosition(20);
+        
+        
+        this.view.setGraph(this.graph);
+        this.view.cleanImage();
+        this.view.repaint();        this.view.repaint();    }//GEN-LAST:event_mostraLabActionPerformed
 
     public class ViewPanel extends JPanel {
 
@@ -469,7 +517,12 @@ public class View extends javax.swing.JFrame {
 
                 g2Buffer.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-                graph.draw(g2Buffer);
+                if (topologia) {
+                    graph.drawTopo(g2Buffer);
+                    topologia = false;
+                } else {
+                    graph.draw(g2Buffer);
+                }
                 g2Buffer.dispose();
             }
 
@@ -600,6 +653,7 @@ public class View extends javax.swing.JFrame {
     private Grafo grafo;
     private Graph backUpGraph;
     private Grafo backUpGrafo;
+    private boolean topologia = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu algoritmos_Menu;
     private javax.swing.JMenu aplic_Menu;
@@ -616,6 +670,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBusca;
+    private javax.swing.JMenuItem mostraLab;
     private javax.swing.JMenu opcoes_Menu;
     private javax.swing.JPanel panelBL;
     private javax.swing.JPanel panelVazio;

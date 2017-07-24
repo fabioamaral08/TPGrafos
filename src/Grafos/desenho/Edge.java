@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Polygon;
 
 /**
  *
@@ -23,14 +24,34 @@ public class Edge {
     private Boolean selected = false; //se a aresta está selecionada
     private int peso;
 
-    public Edge(Vertex source, Vertex target, int peso,boolean directed) {
+    public Vertex getSource() {
+        return source;
+    }
+
+    public void setSource(Vertex source) {
+        this.source = source;
+    }
+
+    public Vertex getTarget() {
+        return target;
+    }
+
+    public void setTarget(Vertex target) {
+        this.target = target;
+    }
+
+    public int getPeso() {
+        return peso;
+    }
+
+    public Edge(Vertex source, Vertex target, int peso, boolean directed) {
         this.source = source;
         this.target = target;
         this.peso = peso;
         this.directed = directed;
     }
 
-    public void draw(java.awt.Graphics2D g2) {
+    public void draw(java.awt.Graphics2D g2,boolean texto) {
         //Combines the color of the two vertex to paint the edge
 
         if (selected) {
@@ -65,10 +86,63 @@ public class Edge {
                     6, 14);
 
         }
-
+        if(texto){
         drawText(g2, new Point((int) source.getX(), (int) source.getY()),
                 new Point((int) target.getX(), (int) target.getY()),
                 Integer.toString(this.peso), 80);
+        }
+
+        g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 1.0f));
+    }
+
+    public void drawTopo(java.awt.Graphics2D g2, int inter) {
+        //Combines the color of the two vertex to paint the edge
+
+        if (selected) {
+            g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 1.0f));
+            g2.setStroke(new java.awt.BasicStroke(4.0f));
+        } else {
+            g2.setStroke(new java.awt.BasicStroke(1.0f));
+            if ((this.target.isSelected() && this.source.isSelected())) { //se os vertices estao selecionados
+                g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 0.5f));
+            } else {//se os vertices nao estao selecionados
+                g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 0.2f));
+            }
+        }
+
+        this.color = new Color((this.source.getColor().getRed() + this.target.getColor().getRed()) / 2,
+                (this.source.getColor().getGreen() + this.target.getColor().getGreen()) / 2,
+                (this.source.getColor().getBlue() + this.target.getColor().getBlue()) / 2);
+
+        g2.setColor(this.color);
+
+        int dist;
+
+        dist = (int) (this.target.getX() - this.source.getX());
+
+        g2.drawArc(((int) this.source.getX()), ((int) this.source.getY() - 50),
+                dist, 100, 0, 180 * inter);
+        g2.setStroke(new java.awt.BasicStroke(1.0f));
+
+//        if (isDirected()) {
+////            drawArrow(g2, new Point((int) source.getX(), (int) source.getY()),
+////                    new Point((int) target.getX(), (int) target.getY()),
+////                    6.0f);
+//
+//            drawArrowNew(g2, new Point((int) target.getX(), (int) target.getY()-(2*inter)),
+//                    new Point((int) target.getX(), (int) target.getY()),
+//                    6, 14);
+//
+//        }
+    
+        g2.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
+        g2.setColor(Color.BLACK);
+        if (inter == 1) {
+            System.out.println(Integer.toString(this.peso));
+            g2.drawString(Integer.toString(this.peso), (int) (source.getX() + target.getX()) / 2, (int) source.getY() - (50));
+        } else {
+            g2.drawString(Integer.toString(this.peso), (int) (source.getX() + target.getX()) / 2, (int) source.getY()+50 );
+        }
 
         g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 1.0f));
     }
@@ -97,8 +171,8 @@ public class Edge {
         float sen = (t.y - s.y) / r;
 
         Point pc = new Point(Math.round(deslocamento * -cos) + t.x, Math.round(deslocamento * -sen) + t.y);
-        
-        g2.setFont(new Font(Font.DIALOG,Font.PLAIN,20));
+
+        g2.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
         g2.setColor(Color.BLACK);
         //g2.rotate(Math.acos(cos), pc.x, pc.y);
         g2.drawString(text, pc.x, pc.y);
