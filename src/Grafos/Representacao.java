@@ -12,6 +12,12 @@ package Grafos;
 public abstract class Representacao {
     protected int numVert = 0;
     protected int tipo;
+
+    public int getTipo() {
+        return tipo;
+    }
+    
+    
     
     public int getNumVertices(){
         return numVert;

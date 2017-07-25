@@ -13,6 +13,20 @@ public class Conectividade {
     private int[] cor;
     private int[] componente;
     private int numComp;
+
+    public int[] getCor() {
+        return cor;
+    }
+
+    public int[] getComponente() {
+        return componente;
+    }
+
+    public int getNumComp() {
+        return numComp;
+    }
+    
+    
     
     public void execute(Grafo g){
         Topologia topsort = new Topologia();

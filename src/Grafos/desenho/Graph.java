@@ -4,6 +4,9 @@
  */
 package Grafos.desenho;
 
+import Grafos.Grafo;
+import Grafos.No;
+import Grafos.Representacao;
 import Grafos.desenho.color.ColorScale;
 import Grafos.desenho.color.GrayScale;
 import Grafos.desenho.color.RainbowScale;
@@ -26,8 +29,6 @@ public class Graph extends Object implements Cloneable {
     public void setApp(boolean app) {
         this.app = app;
     }
-    
-    
 
     public ArrayList<Edge> getEdges() {
         return edges;
@@ -95,6 +96,46 @@ public class Graph extends Object implements Cloneable {
         computeLinePosition();
     }
 
+    public Graph(Grafo g) {
+        Representacao rep = g.getRepresentacao();
+        int numVert = rep.getNumVertices();
+        this.vertex = new ArrayList();
+        this.edges = new ArrayList();
+        boolean dir;
+        if (rep.getTipo() == 1) {
+            dir = true;
+        } else {
+            dir = false;
+        }
+        RainbowScale cS = new RainbowScale();
+        //GrayScale cS = new GrayScale();
+        int colorStep = 255 / numVert;
+        for (int i = 0; i < numVert; i++) {
+            Vertex v = new Vertex();
+            v.setID(i);
+            v.setColor(cS.getColor(i * colorStep));
+
+            this.vertex.add(v);
+
+        }
+
+        for (int i = 0; i < numVert; i++) {
+            No aux = rep.getAdj(i);
+            while (aux != null) {
+                edges.add(new Edge(vertex.get(i), vertex.get(aux.getVertID()), aux.getPeso(), dir));
+                aux = aux.getProx();
+            }
+
+        }
+        if (tipo == 1) {
+            this.Oriented = true;
+        } else {
+            this.Oriented = false;
+        }
+
+        computeCircledPosition(150);
+    }
+
     public void addVertex(Vertex v) {
         this.vertex.add(v);
     }
@@ -149,7 +190,7 @@ public class Graph extends Object implements Cloneable {
 
             float X = (float) pos + deslocX;
             float Y = (float) deslocY;
-            
+
             Vertex v = this.vertex.get(i);
             v.setX(X);
             v.setY(Y);
@@ -252,12 +293,12 @@ public class Graph extends Object implements Cloneable {
         int aux = vf;
         Vertex v1 = this.vertex.get(vi);
         Vertex v2 = this.vertex.get(vf);
-        for(Vertex v: vertex){
+        for (Vertex v : vertex) {
             v.setColor(Color.BLACK);
         }
         v1.setColor(Color.GREEN);
         v2.setColor(Color.RED);
-        
+
         while (caminho[aux] != -1) {
             Edge a = new Edge(this.vertex.get(caminho[aux]), this.vertex.get(aux), 0, true);
             a.setSelected(true);

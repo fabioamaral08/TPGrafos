@@ -14,10 +14,12 @@ import Grafos.AGM;
 import Grafos.BuscaLargura;
 import Grafos.Coloracao;
 import Grafos.ComponentesConexas;
+import Grafos.Conectividade;
 import Grafos.Grafo;
 import Grafos.ListaAdjacencia;
 import Grafos.Representacao;
 import Grafos.Topologia;
+import Grafos.Transposta;
 import Grafos.desenho.color.GrayScale;
 import Grafos.desenho.color.RainbowScale;
 import Maze.Lab;
@@ -461,7 +463,7 @@ public class View extends javax.swing.JFrame {
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
 
-        graph = this.backUpGraph;
+        graph = this.backUpGraph.clone();
         ComponentesConexas componentesConexas = new ComponentesConexas();
         componentesConexas.execute(grafo);
         int comp[] = componentesConexas.getComponentes();
@@ -480,7 +482,7 @@ public class View extends javax.swing.JFrame {
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
 
-        graph = this.backUpGraph;
+        graph = this.backUpGraph.clone();
 
         Coloracao coloracao = new Coloracao();
         coloracao.execute(grafo);
@@ -533,7 +535,20 @@ public class View extends javax.swing.JFrame {
     private void buttonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
-
+        
+        graph = this.backUpGraph.clone();
+        Conectividade componentesConexas = new Conectividade();
+        componentesConexas.execute(grafo);
+        int comp[] = componentesConexas.getComponente();
+        int numComp = componentesConexas.getNumComp();
+        int compStep = 255 / numComp;
+        RainbowScale rbS = new RainbowScale();
+        for (int i = 0; i < comp.length; i++) {
+            System.out.println("Vertice: " + i + " Compoente: " + comp[i]);
+            this.graph.getVertex().get(i).setColor(rbS.getColor(comp[i] * compStep));
+        }
+        this.view.cleanImage();
+        this.view.repaint();
 
     }//GEN-LAST:event_buttonCActionPerformed
 
@@ -564,6 +579,14 @@ public class View extends javax.swing.JFrame {
     private void buttonTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
+        
+        Transposta transp = new Transposta();
+        
+        transp.execute(grafo);
+        
+        this.graph = new Graph(transp.getTransposto());
+        this.view.cleanImage();
+        this.view.repaint();
     }//GEN-LAST:event_buttonTActionPerformed
 
     private void buttonCMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCMActionPerformed
