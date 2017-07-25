@@ -402,6 +402,8 @@ public class View extends javax.swing.JFrame {
                 ////////FAZER O TRATAMENTO NA INSERÇÃO DOS DADOS NA ESTRUTURA
                 int grafo = Integer.parseInt(in.readLine());
 
+                
+
                 //le numero de vertices
                 int nVert = Integer.parseInt(in.readLine());
                 this.graph = new Graph(nVert, grafo); ///desenho
@@ -426,6 +428,32 @@ public class View extends javax.swing.JFrame {
                 this.view.setGraph(graph);
 
                 this.backUpGraph = this.graph.clone();
+                
+                if (grafo == 0) {
+                    this.buttonCC.setEnabled(true);
+                    this.buttonCor.setEnabled(true);
+                    this.buttonAGM.setEnabled(true);
+                    this.buttonC.setEnabled(false);
+                    this.buttonT.setEnabled(false);
+                    this.buttonOT.setEnabled(false);
+                } else {
+                    this.buttonCC.setEnabled(false);
+                    this.buttonCor.setEnabled(false);
+                    this.buttonAGM.setEnabled(false);
+                    this.buttonC.setEnabled(true);
+                    this.buttonT.setEnabled(true);
+
+                    Conectividade conec = new Conectividade();
+
+                    conec.execute(this.grafo);
+
+                    if (conec.getNumComp() == nVert) {
+                        this.buttonOT.setEnabled(true);
+                    } else {
+                        this.buttonOT.setEnabled(false);
+                    }
+
+                }
 
             } catch (IOException ex) {
                 Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
@@ -535,7 +563,7 @@ public class View extends javax.swing.JFrame {
     private void buttonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
-        
+
         graph = this.backUpGraph.clone();
         Conectividade componentesConexas = new Conectividade();
         componentesConexas.execute(grafo);
@@ -579,11 +607,11 @@ public class View extends javax.swing.JFrame {
     private void buttonTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
-        
+
         Transposta transp = new Transposta();
-        
+
         transp.execute(grafo);
-        
+
         this.graph = new Graph(transp.getTransposto());
         this.view.cleanImage();
         this.view.repaint();
@@ -645,7 +673,7 @@ public class View extends javax.swing.JFrame {
     private void bt_goMazeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_goMazeActionPerformed
         int xi, yi, xf, yf;
         graph = this.backUpGraph.clone();
-        
+
         graph.setApp(true);
         try {
             xi = Integer.valueOf(this.tf_xEntradaMaze.getText());
@@ -676,18 +704,18 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_goMazeActionPerformed
 
     private void geraLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_geraLabActionPerformed
-       Lab maze;
-       
-       try{
-           int lin = Integer.valueOf(JOptionPane.showInputDialog("Numero de linhas:"));
-           int col = Integer.valueOf(JOptionPane.showInputDialog("Numero de colunas:"));
-           
-           maze = new Lab(lin,col);
-           
-           maze.gravaArq();
-       }catch(NumberFormatException e){
-           JOptionPane.showMessageDialog(this, "Numero Inválido");
-       }
+        Lab maze;
+
+        try {
+            int lin = Integer.valueOf(JOptionPane.showInputDialog("Numero de linhas:"));
+            int col = Integer.valueOf(JOptionPane.showInputDialog("Numero de colunas:"));
+
+            maze = new Lab(lin, col);
+
+            maze.gravaArq();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Numero Inválido");
+        }
     }//GEN-LAST:event_geraLabActionPerformed
 
     public class ViewPanel extends JPanel {
