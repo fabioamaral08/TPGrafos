@@ -83,13 +83,13 @@ public class View extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane(this.view);
+        scrollPane = new javax.swing.JScrollPane(this.view);
         p_thePanel = new javax.swing.JPanel();
         p_Vazio = new javax.swing.JPanel();
-        p_buscaLargura = new javax.swing.JPanel();
-        buttonBusca = new javax.swing.JButton();
-        textFieldBusca = new javax.swing.JTextField();
-        labelBusca = new javax.swing.JLabel();
+        p_busca = new javax.swing.JPanel();
+        bt_busca = new javax.swing.JButton();
+        tf_busca = new javax.swing.JTextField();
+        lb_busca = new javax.swing.JLabel();
         p_maze = new javax.swing.JPanel();
         lb_entradaMaze = new javax.swing.JLabel();
         lb_saidaMaze = new javax.swing.JLabel();
@@ -102,22 +102,26 @@ public class View extends javax.swing.JFrame {
         lb_ySaidaMaze = new javax.swing.JLabel();
         tf_ySaidaMaze = new javax.swing.JTextField();
         bt_goMaze = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        opcoes_Menu = new javax.swing.JMenu();
-        carregarGrafo_Menu = new javax.swing.JMenuItem();
-        salvarImagem_Menu = new javax.swing.JMenuItem();
-        algoritmos_Menu = new javax.swing.JMenu();
-        buttonCC = new javax.swing.JMenuItem();
-        buttonCor = new javax.swing.JMenuItem();
-        buttonAGM = new javax.swing.JMenuItem();
-        buttonCM = new javax.swing.JMenuItem();
-        buttonC = new javax.swing.JMenuItem();
-        buttonT = new javax.swing.JMenuItem();
-        buttonOT = new javax.swing.JMenuItem();
-        buttonBL = new javax.swing.JMenuItem();
-        aplic_Menu = new javax.swing.JMenu();
-        mostraLab = new javax.swing.JMenuItem();
-        geraLab = new javax.swing.JMenuItem();
+        p_gerar = new javax.swing.JPanel();
+        lb_gerar = new javax.swing.JLabel();
+        tf_gerar = new javax.swing.JTextField();
+        bt_gerar = new javax.swing.JButton();
+        menuBar = new javax.swing.JMenuBar();
+        m_opcoes = new javax.swing.JMenu();
+        mi_carregarGrafo = new javax.swing.JMenuItem();
+        mi_salvarImagem = new javax.swing.JMenuItem();
+        m_algoritmos = new javax.swing.JMenu();
+        mi_compConexas = new javax.swing.JMenuItem();
+        mi_coloracao = new javax.swing.JMenuItem();
+        mi_AGM = new javax.swing.JMenuItem();
+        mi_caminhoMin = new javax.swing.JMenuItem();
+        mi_conectividade = new javax.swing.JMenuItem();
+        mi_transposta = new javax.swing.JMenuItem();
+        mi_ordemTopologica = new javax.swing.JMenuItem();
+        mi_buscaLargura = new javax.swing.JMenuItem();
+        m_aplicacao = new javax.swing.JMenu();
+        mi_maze = new javax.swing.JMenuItem();
+        mi_criaMaze = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,48 +135,48 @@ public class View extends javax.swing.JFrame {
         );
         p_VazioLayout.setVerticalGroup(
             p_VazioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 131, Short.MAX_VALUE)
+            .addGap(0, 136, Short.MAX_VALUE)
         );
 
         p_thePanel.add(p_Vazio, "cardVazio");
         p_Vazio.getAccessibleContext().setAccessibleName("");
 
-        p_buscaLargura.setBorder(javax.swing.BorderFactory.createTitledBorder("Busca em Largura"));
+        p_busca.setBorder(javax.swing.BorderFactory.createTitledBorder("Busca em Largura"));
 
-        buttonBusca.setText("Buscar");
-        buttonBusca.addActionListener(new java.awt.event.ActionListener() {
+        bt_busca.setText("Buscar");
+        bt_busca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonBuscaActionPerformed(evt);
+                bt_buscaActionPerformed(evt);
             }
         });
 
-        labelBusca.setText("Vértice Inicial:");
+        lb_busca.setText("Vértice Inicial:");
 
-        javax.swing.GroupLayout p_buscaLarguraLayout = new javax.swing.GroupLayout(p_buscaLargura);
-        p_buscaLargura.setLayout(p_buscaLarguraLayout);
-        p_buscaLarguraLayout.setHorizontalGroup(
-            p_buscaLarguraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_buscaLarguraLayout.createSequentialGroup()
+        javax.swing.GroupLayout p_buscaLayout = new javax.swing.GroupLayout(p_busca);
+        p_busca.setLayout(p_buscaLayout);
+        p_buscaLayout.setHorizontalGroup(
+            p_buscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_buscaLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addComponent(labelBusca)
+                .addComponent(lb_busca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_busca, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 349, Short.MAX_VALUE)
-                .addComponent(buttonBusca)
+                .addComponent(bt_busca)
                 .addGap(60, 60, 60))
         );
-        p_buscaLarguraLayout.setVerticalGroup(
-            p_buscaLarguraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(p_buscaLarguraLayout.createSequentialGroup()
+        p_buscaLayout.setVerticalGroup(
+            p_buscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(p_buscaLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(p_buscaLarguraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelBusca))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGroup(p_buscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_busca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_busca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_busca))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
-        p_thePanel.add(p_buscaLargura, "cardBusca");
+        p_thePanel.add(p_busca, "cardBusca");
 
         lb_entradaMaze.setText("Entrada:");
 
@@ -245,136 +249,171 @@ public class View extends javax.swing.JFrame {
                     .addComponent(tf_xSaidaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_ySaidaMaze)
                     .addComponent(tf_ySaidaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         p_thePanel.add(p_maze, "cardMaze");
 
-        opcoes_Menu.setText("Opções");
+        lb_gerar.setText("Vértice Inicial:");
 
-        carregarGrafo_Menu.setText("Carregar Grafo");
-        carregarGrafo_Menu.addActionListener(new java.awt.event.ActionListener() {
+        bt_gerar.setText("Gerar");
+        bt_gerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                carregarGrafo_MenuActionPerformed(evt);
+                bt_gerarActionPerformed(evt);
             }
         });
-        opcoes_Menu.add(carregarGrafo_Menu);
 
-        salvarImagem_Menu.setText("Salvar Imagem");
-        salvarImagem_Menu.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.GroupLayout p_gerarLayout = new javax.swing.GroupLayout(p_gerar);
+        p_gerar.setLayout(p_gerarLayout);
+        p_gerarLayout.setHorizontalGroup(
+            p_gerarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(p_gerarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lb_gerar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tf_gerar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 492, Short.MAX_VALUE)
+                .addComponent(bt_gerar)
+                .addGap(31, 31, 31))
+        );
+        p_gerarLayout.setVerticalGroup(
+            p_gerarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(p_gerarLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(p_gerarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_gerar)
+                    .addComponent(tf_gerar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_gerar))
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+
+        p_thePanel.add(p_gerar, "cardGerar");
+
+        m_opcoes.setText("Opções");
+
+        mi_carregarGrafo.setText("Carregar Grafo");
+        mi_carregarGrafo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salvarImagem_MenuActionPerformed(evt);
+                mi_carregarGrafoActionPerformed(evt);
             }
         });
-        opcoes_Menu.add(salvarImagem_Menu);
+        m_opcoes.add(mi_carregarGrafo);
 
-        jMenuBar1.add(opcoes_Menu);
-
-        algoritmos_Menu.setText("Algoritmos");
-
-        buttonCC.setText("Marcar Componentes Conexas");
-        buttonCC.addActionListener(new java.awt.event.ActionListener() {
+        mi_salvarImagem.setText("Salvar Imagem");
+        mi_salvarImagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCCActionPerformed(evt);
+                mi_salvarImagemActionPerformed(evt);
             }
         });
-        algoritmos_Menu.add(buttonCC);
+        m_opcoes.add(mi_salvarImagem);
 
-        buttonCor.setText("Coloração");
-        buttonCor.addActionListener(new java.awt.event.ActionListener() {
+        menuBar.add(m_opcoes);
+
+        m_algoritmos.setText("Algoritmos");
+
+        mi_compConexas.setText("Marcar Componentes Conexas");
+        mi_compConexas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCorActionPerformed(evt);
+                mi_compConexasActionPerformed(evt);
             }
         });
-        algoritmos_Menu.add(buttonCor);
+        m_algoritmos.add(mi_compConexas);
 
-        buttonAGM.setText("Árvore Geradora Mínima");
-        buttonAGM.addActionListener(new java.awt.event.ActionListener() {
+        mi_coloracao.setText("Coloração");
+        mi_coloracao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAGMActionPerformed(evt);
+                mi_coloracaoActionPerformed(evt);
             }
         });
-        algoritmos_Menu.add(buttonAGM);
+        m_algoritmos.add(mi_coloracao);
 
-        buttonCM.setText("Caminho Mínimo");
-        buttonCM.addActionListener(new java.awt.event.ActionListener() {
+        mi_AGM.setText("Árvore Geradora Mínima");
+        mi_AGM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCMActionPerformed(evt);
+                mi_AGMActionPerformed(evt);
             }
         });
-        algoritmos_Menu.add(buttonCM);
+        m_algoritmos.add(mi_AGM);
 
-        buttonC.setText("Conectividade");
-        buttonC.addActionListener(new java.awt.event.ActionListener() {
+        mi_caminhoMin.setText("Caminho Mínimo");
+        mi_caminhoMin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCActionPerformed(evt);
+                mi_caminhoMinActionPerformed(evt);
             }
         });
-        algoritmos_Menu.add(buttonC);
+        m_algoritmos.add(mi_caminhoMin);
 
-        buttonT.setText("Transposição");
-        buttonT.addActionListener(new java.awt.event.ActionListener() {
+        mi_conectividade.setText("Conectividade");
+        mi_conectividade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTActionPerformed(evt);
+                mi_conectividadeActionPerformed(evt);
             }
         });
-        algoritmos_Menu.add(buttonT);
+        m_algoritmos.add(mi_conectividade);
 
-        buttonOT.setText("Ordem Topológica");
-        buttonOT.addActionListener(new java.awt.event.ActionListener() {
+        mi_transposta.setText("Transposição");
+        mi_transposta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOTActionPerformed(evt);
+                mi_transpostaActionPerformed(evt);
             }
         });
-        algoritmos_Menu.add(buttonOT);
+        m_algoritmos.add(mi_transposta);
 
-        buttonBL.setText("Busca em Largura");
-        buttonBL.addActionListener(new java.awt.event.ActionListener() {
+        mi_ordemTopologica.setText("Ordem Topológica");
+        mi_ordemTopologica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonBLActionPerformed(evt);
+                mi_ordemTopologicaActionPerformed(evt);
             }
         });
-        algoritmos_Menu.add(buttonBL);
+        m_algoritmos.add(mi_ordemTopologica);
 
-        jMenuBar1.add(algoritmos_Menu);
+        mi_buscaLargura.setText("Busca em Largura");
+        mi_buscaLargura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_buscaLarguraActionPerformed(evt);
+            }
+        });
+        m_algoritmos.add(mi_buscaLargura);
 
-        aplic_Menu.setText("Aplicação");
-        aplic_Menu.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuBar.add(m_algoritmos);
+
+        m_aplicacao.setText("Aplicação");
+        m_aplicacao.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                aplic_MenuMouseClicked(evt);
+                m_aplicacaoMouseClicked(evt);
             }
         });
-        aplic_Menu.addActionListener(new java.awt.event.ActionListener() {
+        m_aplicacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aplic_MenuActionPerformed(evt);
+                m_aplicacaoActionPerformed(evt);
             }
         });
 
-        mostraLab.setText("Labirinto");
-        mostraLab.addActionListener(new java.awt.event.ActionListener() {
+        mi_maze.setText("Labirinto");
+        mi_maze.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostraLabActionPerformed(evt);
+                mi_mazeActionPerformed(evt);
             }
         });
-        aplic_Menu.add(mostraLab);
+        m_aplicacao.add(mi_maze);
 
-        geraLab.setText("Gerar Labirinto");
-        geraLab.addActionListener(new java.awt.event.ActionListener() {
+        mi_criaMaze.setText("Gerar Labirinto");
+        mi_criaMaze.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                geraLabActionPerformed(evt);
+                mi_criaMazeActionPerformed(evt);
             }
         });
-        aplic_Menu.add(geraLab);
+        m_aplicacao.add(mi_criaMaze);
 
-        jMenuBar1.add(aplic_Menu);
+        menuBar.add(m_aplicacao);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(scrollPane)
             .addComponent(p_thePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -382,13 +421,13 @@ public class View extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(p_thePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void carregarGrafo_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carregarGrafo_MenuActionPerformed
+    private void mi_carregarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_carregarGrafoActionPerformed
         // TODO add your handling code here:
         JFileChooser fc = new JFileChooser("C:\\Users\\fabio\\Desktop\\Aulas\\Grafos\\arq");
         int result;
@@ -401,8 +440,6 @@ public class View extends javax.swing.JFrame {
                 ////////LEMBRAR DE VERIFICAR SE É GRAFO OU DÍGRAFO
                 ////////FAZER O TRATAMENTO NA INSERÇÃO DOS DADOS NA ESTRUTURA
                 int grafo = Integer.parseInt(in.readLine());
-
-                
 
                 //le numero de vertices
                 int nVert = Integer.parseInt(in.readLine());
@@ -428,29 +465,29 @@ public class View extends javax.swing.JFrame {
                 this.view.setGraph(graph);
 
                 this.backUpGraph = this.graph.clone();
-                
+
                 if (grafo == 0) {
-                    this.buttonCC.setEnabled(true);
-                    this.buttonCor.setEnabled(true);
-                    this.buttonAGM.setEnabled(true);
-                    this.buttonC.setEnabled(false);
-                    this.buttonT.setEnabled(false);
-                    this.buttonOT.setEnabled(false);
+                    this.mi_compConexas.setEnabled(true);
+                    this.mi_coloracao.setEnabled(true);
+                    this.mi_AGM.setEnabled(true);
+                    this.mi_conectividade.setEnabled(false);
+                    this.mi_transposta.setEnabled(false);
+                    this.mi_ordemTopologica.setEnabled(false);
                 } else {
-                    this.buttonCC.setEnabled(false);
-                    this.buttonCor.setEnabled(false);
-                    this.buttonAGM.setEnabled(false);
-                    this.buttonC.setEnabled(true);
-                    this.buttonT.setEnabled(true);
+                    this.mi_compConexas.setEnabled(false);
+                    this.mi_coloracao.setEnabled(false);
+                    this.mi_AGM.setEnabled(false);
+                    this.mi_conectividade.setEnabled(true);
+                    this.mi_transposta.setEnabled(true);
 
                     Conectividade conec = new Conectividade();
 
                     conec.execute(this.grafo);
 
                     if (conec.getNumComp() == nVert) {
-                        this.buttonOT.setEnabled(true);
+                        this.mi_ordemTopologica.setEnabled(true);
                     } else {
-                        this.buttonOT.setEnabled(false);
+                        this.mi_ordemTopologica.setEnabled(false);
                     }
 
                 }
@@ -468,9 +505,9 @@ public class View extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_carregarGrafo_MenuActionPerformed
+    }//GEN-LAST:event_mi_carregarGrafoActionPerformed
 
-    private void salvarImagem_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarImagem_MenuActionPerformed
+    private void mi_salvarImagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_salvarImagemActionPerformed
         // TODO add your handling code here:
         JFileChooser dialog = new JFileChooser();
         dialog.setMultiSelectionEnabled(false);
@@ -485,9 +522,9 @@ public class View extends javax.swing.JFrame {
                 Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_salvarImagem_MenuActionPerformed
+    }//GEN-LAST:event_mi_salvarImagemActionPerformed
 
-    private void buttonCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCCActionPerformed
+    private void mi_compConexasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_compConexasActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
 
@@ -504,9 +541,9 @@ public class View extends javax.swing.JFrame {
         }
         this.view.cleanImage();
         this.view.repaint();
-    }//GEN-LAST:event_buttonCCActionPerformed
+    }//GEN-LAST:event_mi_compConexasActionPerformed
 
-    private void buttonCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCorActionPerformed
+    private void mi_coloracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_coloracaoActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
 
@@ -527,40 +564,27 @@ public class View extends javax.swing.JFrame {
         }
         this.view.cleanImage();
         this.view.repaint();
-    }//GEN-LAST:event_buttonCorActionPerformed
+    }//GEN-LAST:event_mi_coloracaoActionPerformed
 
-    private void buttonAGMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAGMActionPerformed
-        p_buscaLargura.setBorder(BorderFactory.createTitledBorder("Árvore Geradora Mínima"));
+    private void mi_AGMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_AGMActionPerformed
+        p_busca.setBorder(BorderFactory.createTitledBorder("Árvore Geradora Mínima"));
 
         graph = this.backUpGraph;
         this.view.cleanImage();
         this.view.repaint();
 
         CardLayout card = (CardLayout) p_thePanel.getLayout();
-        card.show(p_thePanel, "cardBusca");
+        card.show(p_thePanel, "cardGerar");
 
         /*
         Enfiado
         
-        AGM a = new AGM();
-        int vert;
-        try {
-            String opc = this.textFieldBusca.getText();
-            vert = Integer.valueOf(opc);
-            graph = geraGraph(grafo.getRepresentacao(), a.execute(grafo, vert));
-
-        } catch (Exception e) {
-            return;
-        } finally {
-
-            this.view.cleanImage();
-            this.view.repaint();
-        }
+        
          */
 
-    }//GEN-LAST:event_buttonAGMActionPerformed
+    }//GEN-LAST:event_mi_AGMActionPerformed
 
-    private void buttonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCActionPerformed
+    private void mi_conectividadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_conectividadeActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
 
@@ -578,17 +602,17 @@ public class View extends javax.swing.JFrame {
         this.view.cleanImage();
         this.view.repaint();
 
-    }//GEN-LAST:event_buttonCActionPerformed
+    }//GEN-LAST:event_mi_conectividadeActionPerformed
 
-    private void buttonBLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBLActionPerformed
-        p_buscaLargura.setBorder(BorderFactory.createTitledBorder("Busca em Largura"));
+    private void mi_buscaLarguraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_buscaLarguraActionPerformed
+        p_busca.setBorder(BorderFactory.createTitledBorder("Busca em Largura"));
 
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardBusca");
 
-    }//GEN-LAST:event_buttonBLActionPerformed
+    }//GEN-LAST:event_mi_buscaLarguraActionPerformed
 
-    private void buttonOTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOTActionPerformed
+    private void mi_ordemTopologicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_ordemTopologicaActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
 
@@ -602,9 +626,9 @@ public class View extends javax.swing.JFrame {
         this.view.repaint();
 
 
-    }//GEN-LAST:event_buttonOTActionPerformed
+    }//GEN-LAST:event_mi_ordemTopologicaActionPerformed
 
-    private void buttonTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTActionPerformed
+    private void mi_transpostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_transpostaActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
 
@@ -615,20 +639,20 @@ public class View extends javax.swing.JFrame {
         this.graph = new Graph(transp.getTransposto());
         this.view.cleanImage();
         this.view.repaint();
-    }//GEN-LAST:event_buttonTActionPerformed
+    }//GEN-LAST:event_mi_transpostaActionPerformed
 
-    private void buttonCMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCMActionPerformed
+    private void mi_caminhoMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_caminhoMinActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
-    }//GEN-LAST:event_buttonCMActionPerformed
+    }//GEN-LAST:event_mi_caminhoMinActionPerformed
 
-    private void buttonBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscaActionPerformed
+    private void bt_buscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_buscaActionPerformed
 
         int ini;
         this.graph = this.backUpGraph.clone();
         BuscaLargura busca = new BuscaLargura();
         try {
-            ini = Integer.valueOf(this.textFieldBusca.getText());
+            ini = Integer.valueOf(this.tf_busca.getText());
             if (ini < 0 || ini >= this.grafo.getRepresentacao().getNumVertices()) {
                 throw new NumberFormatException();
             }
@@ -648,17 +672,17 @@ public class View extends javax.swing.JFrame {
         this.view.repaint();
 
 
-    }//GEN-LAST:event_buttonBuscaActionPerformed
+    }//GEN-LAST:event_bt_buscaActionPerformed
 
-    private void aplic_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplic_MenuActionPerformed
+    private void m_aplicacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_aplicacaoActionPerformed
 
-    }//GEN-LAST:event_aplic_MenuActionPerformed
+    }//GEN-LAST:event_m_aplicacaoActionPerformed
 
-    private void aplic_MenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aplic_MenuMouseClicked
+    private void m_aplicacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m_aplicacaoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_aplic_MenuMouseClicked
+    }//GEN-LAST:event_m_aplicacaoMouseClicked
 
-    private void mostraLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostraLabActionPerformed
+    private void mi_mazeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_mazeActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardMaze");
 
@@ -668,7 +692,7 @@ public class View extends javax.swing.JFrame {
         this.view.setGraph(this.graph);
         this.view.cleanImage();
 
-        this.view.repaint();        this.view.repaint();    }//GEN-LAST:event_mostraLabActionPerformed
+        this.view.repaint();        this.view.repaint();    }//GEN-LAST:event_mi_mazeActionPerformed
 
     private void bt_goMazeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_goMazeActionPerformed
         int xi, yi, xf, yf;
@@ -703,7 +727,7 @@ public class View extends javax.swing.JFrame {
         this.view.repaint();
     }//GEN-LAST:event_bt_goMazeActionPerformed
 
-    private void geraLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_geraLabActionPerformed
+    private void mi_criaMazeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_criaMazeActionPerformed
         Lab maze;
 
         try {
@@ -716,7 +740,26 @@ public class View extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Numero Inválido");
         }
-    }//GEN-LAST:event_geraLabActionPerformed
+    }//GEN-LAST:event_mi_criaMazeActionPerformed
+
+    private void bt_gerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_gerarActionPerformed
+        AGM a = new AGM();
+        int vert;
+        this.graph = this.backUpGraph.clone();
+        try {
+            String opc = this.tf_gerar.getText();
+            vert = Integer.valueOf(opc);
+            a.execute(grafo, vert);
+            graph.agm(a.getAnt());
+
+        } catch (Exception e) {
+            return;
+        } finally {
+
+            this.view.cleanImage();
+            this.view.repaint();
+        }
+    }//GEN-LAST:event_bt_gerarActionPerformed
 
     public class ViewPanel extends JPanel {
 
@@ -887,37 +930,41 @@ public class View extends javax.swing.JFrame {
     private boolean topologia = false;
     private int col;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu algoritmos_Menu;
-    private javax.swing.JMenu aplic_Menu;
+    private javax.swing.JButton bt_busca;
+    private javax.swing.JButton bt_gerar;
     private javax.swing.JButton bt_goMaze;
-    private javax.swing.JMenuItem buttonAGM;
-    private javax.swing.JMenuItem buttonBL;
-    private javax.swing.JButton buttonBusca;
-    private javax.swing.JMenuItem buttonC;
-    private javax.swing.JMenuItem buttonCC;
-    private javax.swing.JMenuItem buttonCM;
-    private javax.swing.JMenuItem buttonCor;
-    private javax.swing.JMenuItem buttonOT;
-    private javax.swing.JMenuItem buttonT;
-    private javax.swing.JMenuItem carregarGrafo_Menu;
-    private javax.swing.JMenuItem geraLab;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labelBusca;
+    private javax.swing.JLabel lb_busca;
     private javax.swing.JLabel lb_entradaMaze;
+    private javax.swing.JLabel lb_gerar;
     private javax.swing.JLabel lb_saidaMaze;
     private javax.swing.JLabel lb_xEntradaMaze;
     private javax.swing.JLabel lb_xSaidaMaze;
     private javax.swing.JLabel lb_yEntradaMaze;
     private javax.swing.JLabel lb_ySaidaMaze;
-    private javax.swing.JMenuItem mostraLab;
-    private javax.swing.JMenu opcoes_Menu;
+    private javax.swing.JMenu m_algoritmos;
+    private javax.swing.JMenu m_aplicacao;
+    private javax.swing.JMenu m_opcoes;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem mi_AGM;
+    private javax.swing.JMenuItem mi_buscaLargura;
+    private javax.swing.JMenuItem mi_caminhoMin;
+    private javax.swing.JMenuItem mi_carregarGrafo;
+    private javax.swing.JMenuItem mi_coloracao;
+    private javax.swing.JMenuItem mi_compConexas;
+    private javax.swing.JMenuItem mi_conectividade;
+    private javax.swing.JMenuItem mi_criaMaze;
+    private javax.swing.JMenuItem mi_maze;
+    private javax.swing.JMenuItem mi_ordemTopologica;
+    private javax.swing.JMenuItem mi_salvarImagem;
+    private javax.swing.JMenuItem mi_transposta;
     private javax.swing.JPanel p_Vazio;
-    private javax.swing.JPanel p_buscaLargura;
+    private javax.swing.JPanel p_busca;
+    private javax.swing.JPanel p_gerar;
     private javax.swing.JPanel p_maze;
     private javax.swing.JPanel p_thePanel;
-    private javax.swing.JMenuItem salvarImagem_Menu;
-    private javax.swing.JTextField textFieldBusca;
+    private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JTextField tf_busca;
+    private javax.swing.JTextField tf_gerar;
     private javax.swing.JTextField tf_xEntradaMaze;
     private javax.swing.JTextField tf_xSaidaMaze;
     private javax.swing.JTextField tf_yEntradaMaze;

@@ -2,125 +2,125 @@
 
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+    <Menu class="javax.swing.JMenuBar" name="menuBar">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="opcoes_Menu">
+        <Menu class="javax.swing.JMenu" name="m_opcoes">
           <Properties>
             <Property name="text" type="java.lang.String" value="Op&#xe7;&#xf5;es"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="carregarGrafo_Menu">
+            <MenuItem class="javax.swing.JMenuItem" name="mi_carregarGrafo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Carregar Grafo"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="carregarGrafo_MenuActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_carregarGrafoActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="salvarImagem_Menu">
+            <MenuItem class="javax.swing.JMenuItem" name="mi_salvarImagem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salvar Imagem"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salvarImagem_MenuActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_salvarImagemActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="algoritmos_Menu">
+        <Menu class="javax.swing.JMenu" name="m_algoritmos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Algoritmos"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="buttonCC">
+            <MenuItem class="javax.swing.JMenuItem" name="mi_compConexas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Marcar Componentes Conexas"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCCActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_compConexasActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="buttonCor">
+            <MenuItem class="javax.swing.JMenuItem" name="mi_coloracao">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Colora&#xe7;&#xe3;o"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCorActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_coloracaoActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="buttonAGM">
+            <MenuItem class="javax.swing.JMenuItem" name="mi_AGM">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#xc1;rvore Geradora M&#xed;nima"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAGMActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_AGMActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="buttonCM">
+            <MenuItem class="javax.swing.JMenuItem" name="mi_caminhoMin">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Caminho M&#xed;nimo"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCMActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_caminhoMinActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="buttonC">
+            <MenuItem class="javax.swing.JMenuItem" name="mi_conectividade">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Conectividade"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_conectividadeActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="buttonT">
+            <MenuItem class="javax.swing.JMenuItem" name="mi_transposta">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Transposi&#xe7;&#xe3;o"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonTActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_transpostaActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="buttonOT">
+            <MenuItem class="javax.swing.JMenuItem" name="mi_ordemTopologica">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ordem Topol&#xf3;gica"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOTActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_ordemTopologicaActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="buttonBL">
+            <MenuItem class="javax.swing.JMenuItem" name="mi_buscaLargura">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Busca em Largura"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBLActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_buscaLarguraActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="aplic_Menu">
+        <Menu class="javax.swing.JMenu" name="m_aplicacao">
           <Properties>
             <Property name="text" type="java.lang.String" value="Aplica&#xe7;&#xe3;o"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="aplic_MenuMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aplic_MenuActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="m_aplicacaoMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="m_aplicacaoActionPerformed"/>
           </Events>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mostraLab">
+            <MenuItem class="javax.swing.JMenuItem" name="mi_maze">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Labirinto"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mostraLabActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_mazeActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="geraLab">
+            <MenuItem class="javax.swing.JMenuItem" name="mi_criaMaze">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gerar Labirinto"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="geraLabActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_criaMazeActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -132,7 +132,7 @@
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
   <SyntheticProperties>
-    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="menuBar"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
@@ -151,7 +151,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+          <Component id="scrollPane" alignment="0" max="32767" attributes="0"/>
           <Component id="p_thePanel" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -160,13 +160,13 @@
           <Group type="102" alignment="1" attributes="0">
               <Component id="p_thePanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="430" max="-2" attributes="0"/>
+              <Component id="scrollPane" min="-2" pref="430" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+    <Container class="javax.swing.JScrollPane" name="scrollPane">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JScrollPane(this.view)"/>
       </AuxValues>
@@ -195,12 +195,12 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="131" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="136" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="javax.swing.JPanel" name="p_buscaLargura">
+        <Container class="javax.swing.JPanel" name="p_busca">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -219,11 +219,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                      <Component id="labelBusca" min="-2" max="-2" attributes="0"/>
+                      <Component id="lb_busca" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="textFieldBusca" min="-2" pref="81" max="-2" attributes="0"/>
+                      <Component id="tf_busca" min="-2" pref="81" max="-2" attributes="0"/>
                       <EmptySpace pref="349" max="32767" attributes="0"/>
-                      <Component id="buttonBusca" min="-2" max="-2" attributes="0"/>
+                      <Component id="bt_busca" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -233,27 +233,27 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="buttonBusca" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="textFieldBusca" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelBusca" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bt_busca" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="tf_busca" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lb_busca" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="40" max="32767" attributes="0"/>
+                      <EmptySpace pref="45" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="buttonBusca">
+            <Component class="javax.swing.JButton" name="bt_busca">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Buscar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBuscaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_buscaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="textFieldBusca">
+            <Component class="javax.swing.JTextField" name="tf_busca">
             </Component>
-            <Component class="javax.swing.JLabel" name="labelBusca">
+            <Component class="javax.swing.JLabel" name="lb_busca">
               <Properties>
                 <Property name="text" type="java.lang.String" value="V&#xe9;rtice Inicial:"/>
               </Properties>
@@ -328,7 +328,7 @@
                           <Component id="lb_ySaidaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tf_ySaidaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="15" max="32767" attributes="0"/>
+                      <EmptySpace pref="20" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -378,6 +378,59 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_goMazeActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="p_gerar">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="cardGerar"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lb_gerar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="tf_gerar" min="-2" pref="29" max="-2" attributes="0"/>
+                      <EmptySpace pref="492" max="32767" attributes="0"/>
+                      <Component id="bt_gerar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lb_gerar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tf_gerar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bt_gerar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="62" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="lb_gerar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="V&#xe9;rtice Inicial:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tf_gerar">
+            </Component>
+            <Component class="javax.swing.JButton" name="bt_gerar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Gerar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_gerarActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

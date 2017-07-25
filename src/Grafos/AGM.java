@@ -12,15 +12,20 @@ package Grafos;
 public class AGM {
 
     private int numVert;
+    private int[] ant;
 
-    public int[] execute(Grafo g, int vert) {
-        this.numVert = g.getRepresentacao().getNumVertices();
-        Representacao rep = g.getRepresentacao();
-        return AGMPrimLista(g,vert);
+    public int[] getAnt() {
+        return ant;
     }
 
-    public int[] AGMPrimLista(Grafo g, int vert) {
-        int[] ant = new int[this.numVert];
+    public void execute(Grafo g, int vert) {
+        this.numVert = g.getRepresentacao().getNumVertices();
+        Representacao rep = g.getRepresentacao();
+        AGMPrimLista(g,vert);
+    }
+
+    public void AGMPrimLista(Grafo g, int vert) {
+        ant = new int[this.numVert];
         int[] cor = new int[this.numVert];
         int[] valor = new int[this.numVert];
         int fim = this.numVert;
@@ -62,7 +67,7 @@ public class AGM {
             fim--;
         }
 
-        return ant;
+        
     }
 
 

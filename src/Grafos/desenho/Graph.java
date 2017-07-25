@@ -308,4 +308,13 @@ public class Graph extends Object implements Cloneable {
         }
     }
 
+    public void agm(int[] ant){
+        for (int i = 0; i < ant.length; i++) {
+            if (ant[i] != -1) {
+                Edge a = new Edge(this.vertex.get(ant[i]), this.vertex.get(i), 0, false);
+                a.setSelected(true);
+                this.edges.add(a);
+            }
+        }
+    }
 }
