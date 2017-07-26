@@ -10,7 +10,10 @@ import Grafos.Representacao;
 import Grafos.desenho.color.ColorScale;
 import Grafos.desenho.color.GrayScale;
 import Grafos.desenho.color.RainbowScale;
+import Maze.Cell;
+import Maze.Lab;
 import java.awt.Color;
+import java.awt.Point;
 import java.util.ArrayList;
 
 /**
@@ -308,7 +311,7 @@ public class Graph extends Object implements Cloneable {
         }
     }
 
-    public void agm(int[] ant){
+    public void agm(int[] ant) {
         for (int i = 0; i < ant.length; i++) {
             if (ant[i] != -1) {
                 Edge a = new Edge(this.vertex.get(ant[i]), this.vertex.get(i), 0, false);
@@ -317,4 +320,53 @@ public class Graph extends Object implements Cloneable {
             }
         }
     }
+
+    public void drawLab(java.awt.Graphics2D g2, Grafo g, int col) {
+        Color color;
+        Lab maze = new Lab(g, col);
+        
+        Cell[][] cells = maze.getCells();
+        int d = 25;
+        boolean[] parede = new boolean[4];
+        int l = maze.getLin();
+        int c = maze.getCol();
+        
+        g2.setStroke(new java.awt.BasicStroke(8.0f));
+        color = Color.BLACK;
+        g2.setColor(color);
+        
+        for(int i= 0 ; i < l;i++){
+            for(int j = 0 ; j < c ; j++){
+                parede = cells[i][j].getParedes();
+                for(int k = 0; k < 4; k++){
+                    if(parede[k]){
+                        Vertex v = this.vertex.get(i*col+j);
+                        switch(k){
+                            case 0:
+                                g2.drawLine(((int)v.getX()-d), ((int)v.getY()-d), ((int)v.getX()+d), ((int)v.getY()-d));
+                                break;
+                            case 1:
+                                g2.drawLine(((int)v.getX()+d), ((int)v.getY()-d), ((int)v.getX()+d), ((int)v.getY()+d));
+                                break;
+                            case 2:
+                                g2.drawLine(((int)v.getX()-d), ((int)v.getY()+d), ((int)v.getX()+d), ((int)v.getY()+d));
+                                break;
+                            case 3:
+                                g2.drawLine(((int)v.getX()-d), ((int)v.getY()-d), ((int)v.getX()-d), ((int)v.getY()+d));
+                                break;
+                                
+                        }
+                    }
+                }
+            }
+        }
+//        g2.setColor(color);
+//
+//        g2.drawLine(((int) this.source.getX()), ((int) this.source.getY()),
+//                ((int) this.target.getX()), ((int) this.target.getY()));
+//        g2.setStroke(new java.awt.BasicStroke(1.0f));
+//
+        g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 1.0f));
+    }
+
 }

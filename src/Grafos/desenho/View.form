@@ -102,10 +102,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Aplica&#xe7;&#xe3;o"/>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="m_aplicacaoMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="m_aplicacaoActionPerformed"/>
-          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mi_maze">
               <Properties>
@@ -298,9 +294,13 @@
                               <Component id="tf_ySaidaMaze" min="-2" pref="31" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="481" max="32767" attributes="0"/>
-                      <Component id="bt_goMaze" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                      <EmptySpace pref="461" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="caminhoToggle" alignment="1" max="32767" attributes="0"/>
+                          <Component id="paredeToggle" alignment="1" max="32767" attributes="0"/>
+                          <Component id="bt_goMaze" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -308,27 +308,40 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lb_entradaMaze" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lb_entradaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="paredeToggle" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tf_xEntradaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tf_yEntradaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lb_xEntradaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lb_yEntradaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="tf_xEntradaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tf_yEntradaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lb_xEntradaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lb_yEntradaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="caminhoToggle" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lb_saidaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bt_goMaze" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="lb_saidaMaze" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lb_xSaidaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tf_xSaidaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lb_ySaidaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tf_ySaidaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="bt_goMaze" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lb_xSaidaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tf_xSaidaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lb_ySaidaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tf_ySaidaMaze" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -378,6 +391,22 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_goMazeActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="paredeToggle">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Mostrar Paredes"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="paredeToggleActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="caminhoToggle">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Esconder Caminho"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="caminhoToggleActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

@@ -28,6 +28,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.RenderingHints;
+import java.awt.event.MouseWheelEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -56,6 +58,9 @@ public class View extends javax.swing.JFrame {
         this.view = new ViewPanel();
         //this.view.setGraph(this.graph);
         initComponents();
+        this.m_algoritmos.setEnabled(false);
+        this.m_aplicacao.setEnabled(false);
+        this.mi_salvarImagem.setEnabled(false);
     }
 
     private Graph geraGraph(Representacao rep, int[] ant) {
@@ -102,6 +107,8 @@ public class View extends javax.swing.JFrame {
         lb_ySaidaMaze = new javax.swing.JLabel();
         tf_ySaidaMaze = new javax.swing.JTextField();
         bt_goMaze = new javax.swing.JButton();
+        paredeToggle = new javax.swing.JToggleButton();
+        caminhoToggle = new javax.swing.JToggleButton();
         p_gerar = new javax.swing.JPanel();
         lb_gerar = new javax.swing.JLabel();
         tf_gerar = new javax.swing.JTextField();
@@ -197,6 +204,20 @@ public class View extends javax.swing.JFrame {
             }
         });
 
+        paredeToggle.setText("Mostrar Paredes");
+        paredeToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paredeToggleActionPerformed(evt);
+            }
+        });
+
+        caminhoToggle.setText("Esconder Caminho");
+        caminhoToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                caminhoToggleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout p_mazeLayout = new javax.swing.GroupLayout(p_maze);
         p_maze.setLayout(p_mazeLayout);
         p_mazeLayout.setHorizontalGroup(
@@ -224,32 +245,43 @@ public class View extends javax.swing.JFrame {
                         .addComponent(lb_ySaidaMaze)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tf_ySaidaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 481, Short.MAX_VALUE)
-                .addComponent(bt_goMaze)
-                .addGap(56, 56, 56))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 461, Short.MAX_VALUE)
+                .addGroup(p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(caminhoToggle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(paredeToggle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_goMaze, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         p_mazeLayout.setVerticalGroup(
             p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(p_mazeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lb_entradaMaze)
+                .addGroup(p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_entradaMaze)
+                    .addComponent(paredeToggle))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_xEntradaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_yEntradaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lb_xEntradaMaze)
-                    .addComponent(lb_yEntradaMaze))
-                .addGap(18, 18, 18)
-                .addGroup(p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_saidaMaze)
+                .addGroup(p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(p_mazeLayout.createSequentialGroup()
+                        .addGroup(p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tf_xEntradaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_yEntradaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lb_xEntradaMaze)
+                            .addComponent(lb_yEntradaMaze))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_mazeLayout.createSequentialGroup()
+                        .addComponent(caminhoToggle)
+                        .addGap(7, 7, 7)))
+                .addGroup(p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(p_mazeLayout.createSequentialGroup()
+                        .addComponent(lb_saidaMaze)
+                        .addGap(9, 9, 9)
+                        .addGroup(p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lb_xSaidaMaze)
+                            .addComponent(tf_xSaidaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lb_ySaidaMaze)
+                            .addComponent(tf_ySaidaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(bt_goMaze))
-                .addGap(4, 4, 4)
-                .addGroup(p_mazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_xSaidaMaze)
-                    .addComponent(tf_xSaidaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lb_ySaidaMaze)
-                    .addComponent(tf_ySaidaMaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         p_thePanel.add(p_maze, "cardMaze");
@@ -378,16 +410,6 @@ public class View extends javax.swing.JFrame {
         menuBar.add(m_algoritmos);
 
         m_aplicacao.setText("Aplicação");
-        m_aplicacao.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                m_aplicacaoMouseClicked(evt);
-            }
-        });
-        m_aplicacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                m_aplicacaoActionPerformed(evt);
-            }
-        });
 
         mi_maze.setText("Labirinto");
         mi_maze.addActionListener(new java.awt.event.ActionListener() {
@@ -469,10 +491,20 @@ public class View extends javax.swing.JFrame {
                 if (grafo == 0) {
                     this.mi_compConexas.setEnabled(true);
                     this.mi_coloracao.setEnabled(true);
-                    this.mi_AGM.setEnabled(true);
                     this.mi_conectividade.setEnabled(false);
                     this.mi_transposta.setEnabled(false);
                     this.mi_ordemTopologica.setEnabled(false);
+
+                    ComponentesConexas cc = new ComponentesConexas();
+                    cc.execute(this.grafo);
+
+                    if (cc.getNumComponentes() > 1) {
+                        this.mi_AGM.setEnabled(false);
+                        this.setTitle("Grafo - Não Conexo");
+                    } else {
+                        this.mi_AGM.setEnabled(true);
+                        this.setTitle("Grafo - Conexo");
+                    }
                 } else {
                     this.mi_compConexas.setEnabled(false);
                     this.mi_coloracao.setEnabled(false);
@@ -481,16 +513,25 @@ public class View extends javax.swing.JFrame {
                     this.mi_transposta.setEnabled(true);
 
                     Conectividade conec = new Conectividade();
-
                     conec.execute(this.grafo);
 
                     if (conec.getNumComp() == nVert) {
                         this.mi_ordemTopologica.setEnabled(true);
+                        this.setTitle("Dígrafo - Acíclico");
                     } else {
                         this.mi_ordemTopologica.setEnabled(false);
+                        this.setTitle("Dígrafo - Cíclico");
                     }
 
                 }
+                this.m_algoritmos.setEnabled(true);
+                this.m_aplicacao.setEnabled(true);
+                this.mi_salvarImagem.setEnabled(true);
+
+                this.ap = false;
+
+                CardLayout card = (CardLayout) p_thePanel.getLayout();
+                card.show(p_thePanel, "cardVazio");
 
             } catch (IOException ex) {
                 Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
@@ -527,6 +568,7 @@ public class View extends javax.swing.JFrame {
     private void mi_compConexasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_compConexasActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
+        this.ap = false;
 
         graph = this.backUpGraph.clone();
         ComponentesConexas componentesConexas = new ComponentesConexas();
@@ -546,6 +588,7 @@ public class View extends javax.swing.JFrame {
     private void mi_coloracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_coloracaoActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
+        this.ap = false;
 
         graph = this.backUpGraph.clone();
 
@@ -569,24 +612,22 @@ public class View extends javax.swing.JFrame {
     private void mi_AGMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_AGMActionPerformed
         p_busca.setBorder(BorderFactory.createTitledBorder("Árvore Geradora Mínima"));
 
-        graph = this.backUpGraph;
+        graph = this.backUpGraph.clone();
         this.view.cleanImage();
         this.view.repaint();
 
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardGerar");
+        this.ap = false;
+        this.tf_gerar.setText("");
 
-        /*
-        Enfiado
-        
-        
-         */
 
     }//GEN-LAST:event_mi_AGMActionPerformed
 
     private void mi_conectividadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_conectividadeActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
+        this.ap = false;
 
         graph = this.backUpGraph.clone();
         Conectividade componentesConexas = new Conectividade();
@@ -609,12 +650,14 @@ public class View extends javax.swing.JFrame {
 
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardBusca");
+        this.tf_busca.setText("");
 
     }//GEN-LAST:event_mi_buscaLarguraActionPerformed
 
     private void mi_ordemTopologicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_ordemTopologicaActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
+        this.ap = false;
 
         this.topologia = true;
 
@@ -631,6 +674,7 @@ public class View extends javax.swing.JFrame {
     private void mi_transpostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_transpostaActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
+        this.ap = false;
 
         Transposta transp = new Transposta();
 
@@ -644,6 +688,7 @@ public class View extends javax.swing.JFrame {
     private void mi_caminhoMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_caminhoMinActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
         card.show(p_thePanel, "cardVazio");
+        this.ap = false;
     }//GEN-LAST:event_mi_caminhoMinActionPerformed
 
     private void bt_buscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_buscaActionPerformed
@@ -674,28 +719,9 @@ public class View extends javax.swing.JFrame {
 
     }//GEN-LAST:event_bt_buscaActionPerformed
 
-    private void m_aplicacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_aplicacaoActionPerformed
-
-    }//GEN-LAST:event_m_aplicacaoActionPerformed
-
-    private void m_aplicacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m_aplicacaoMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_m_aplicacaoMouseClicked
-
-    private void mi_mazeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_mazeActionPerformed
-        CardLayout card = (CardLayout) p_thePanel.getLayout();
-        card.show(p_thePanel, "cardMaze");
-
-        this.col = Integer.valueOf(JOptionPane.showInputDialog(this, "Numero de colunas do labirinto:"));
-        this.graph.computeMazePosition(col);
-
-        this.view.setGraph(this.graph);
-        this.view.cleanImage();
-
-        this.view.repaint();        this.view.repaint();    }//GEN-LAST:event_mi_mazeActionPerformed
-
     private void bt_goMazeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_goMazeActionPerformed
         int xi, yi, xf, yf;
+
         graph = this.backUpGraph.clone();
 
         graph.setApp(true);
@@ -761,6 +787,37 @@ public class View extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bt_gerarActionPerformed
 
+    private void paredeToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paredeToggleActionPerformed
+        this.isLab = this.paredeToggle.isSelected();
+
+        this.view.cleanImage();
+        this.view.repaint();
+    }//GEN-LAST:event_paredeToggleActionPerformed
+
+    private void caminhoToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caminhoToggleActionPerformed
+        this.view.cleanImage();
+        this.view.repaint();
+    }//GEN-LAST:event_caminhoToggleActionPerformed
+
+    private void mi_mazeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_mazeActionPerformed
+        CardLayout card = (CardLayout) p_thePanel.getLayout();
+        card.show(p_thePanel, "cardMaze");
+        this.graph = this.backUpGraph.clone();
+        this.tf_xEntradaMaze.setText("");
+        this.tf_xSaidaMaze.setText("");
+        this.tf_yEntradaMaze.setText("");
+        this.tf_ySaidaMaze.setText("");
+        this.ap = true;
+        this.caminhoToggle.setSelected(true);
+        this.paredeToggle.setSelected(true);
+        this.col = Integer.valueOf(JOptionPane.showInputDialog(this, "Numero de colunas do labirinto:"));
+        this.graph.computeMazePosition(col);
+
+        this.view.setGraph(this.graph);
+        this.view.cleanImage();
+        this.view.repaint();
+    }//GEN-LAST:event_mi_mazeActionPerformed
+
     public class ViewPanel extends JPanel {
 
         public ViewPanel() {
@@ -794,12 +851,18 @@ public class View extends javax.swing.JFrame {
                 if (topologia) {
                     graph.drawTopo(g2Buffer);
                     topologia = false;
-                } else {
+                } else if (!ap || !caminhoToggle.isSelected()) {
                     graph.draw(g2Buffer);
+
                 }
+                if (paredeToggle.isSelected() && ap) {
+                    graph.drawLab(g2Buffer, grafo, col);
+                    isLab = false;
+                }
+
                 g2Buffer.dispose();
             }
-
+            
             if (this.imageBuffer != null) {
                 g2.drawImage(this.imageBuffer, 0, 0, null);
             }
@@ -897,6 +960,8 @@ public class View extends javax.swing.JFrame {
             this.repaint();
         }
 
+        
+
         @Override
         public void setFont(java.awt.Font font) {
             //
@@ -921,6 +986,7 @@ public class View extends javax.swing.JFrame {
         private ArrayList<Vertex> selectedVertices;
         //The image which will be drawn as a graph
         private BufferedImage imageBuffer;
+        
     }
     private ViewPanel view;
     private Graph graph;
@@ -928,11 +994,14 @@ public class View extends javax.swing.JFrame {
     private Graph backUpGraph;
     private Grafo backUpGrafo;
     private boolean topologia = false;
+    private boolean isLab = false;
+    private boolean ap = false;
     private int col;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_busca;
     private javax.swing.JButton bt_gerar;
     private javax.swing.JButton bt_goMaze;
+    private javax.swing.JToggleButton caminhoToggle;
     private javax.swing.JLabel lb_busca;
     private javax.swing.JLabel lb_entradaMaze;
     private javax.swing.JLabel lb_gerar;
@@ -962,6 +1031,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JPanel p_gerar;
     private javax.swing.JPanel p_maze;
     private javax.swing.JPanel p_thePanel;
+    private javax.swing.JToggleButton paredeToggle;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTextField tf_busca;
     private javax.swing.JTextField tf_gerar;

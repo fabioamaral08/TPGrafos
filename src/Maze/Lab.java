@@ -5,6 +5,8 @@
  */
 package Maze;
 
+import Grafos.Grafo;
+import Grafos.Representacao;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -37,6 +39,47 @@ public class Lab {
 
         generate(l * c, l, c);
     }
+
+    public Lab(Grafo g, int col) {
+        Representacao rep = g.getRepresentacao();
+        int numVert = rep.getNumVertices();
+        this.lin = numVert / col;
+        this.col = col;
+        this.cells = new Cell[this.lin][this.col];
+        
+        for (int i = 0; i < this.lin; i++) {
+            for (int j = 0; j < this.col; j++) {
+                this.cells[i][j] = new Cell(i, j);
+
+            }
+        }
+        
+        for (int i = 0; i < this.lin; i++) {
+            for (int j = 0; j < this.col; j++) {
+                Grafos.No aux = rep.getAdj(i*col+j);
+                while (aux != null){
+                    int ID = aux.getVertID();
+                    int l = (ID)/col;
+                    int c = ID - (l*col);
+                    removeParede(cells[l][c],cells[i][j]);
+                    aux = aux.getProx();
+                }
+            }
+        }
+    }
+
+    public Cell[][] getCells() {
+        return cells;
+    }
+
+    public int getLin() {
+        return lin;
+    }
+
+    public int getCol() {
+        return col;
+    }
+    
 
     private void generate(int numCell, int lin, int col) {
         Stack pilha = new Stack();
@@ -152,8 +195,8 @@ public class Lab {
     }
 
     public void gravaArq() {
-        int numVert = lin*col;
-        
+        int numVert = lin * col;
+
         String res = exibe();
         JFileChooser dialog = new JFileChooser();
         dialog.setMultiSelectionEnabled(false);
@@ -178,6 +221,5 @@ public class Lab {
             }
         }
 
-        
     }
 }
