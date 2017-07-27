@@ -14,7 +14,7 @@ public class ComponentesConexas {
     
     public void execute(Grafo grafo) {
         Representacao rep = grafo.getRepresentacao();
-        componentes = new int[rep.getNumVertices()];
+        componentes = new int[rep.getNumVertices()]; //inicia o vetor com a solução
         buscaProfundidade(rep);
     }
 
@@ -25,7 +25,7 @@ public class ComponentesConexas {
         int idComp = -1;
         for (int i = 0; i < componentes.length; i++) {
             if (componentes[i] == -1) {
-                idComp++;
+                idComp++;   //incrementa componente atual
                 visita(rep, i, idComp);
             }
         }

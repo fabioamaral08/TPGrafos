@@ -21,11 +21,11 @@ public class Caminho {
         return ant;
     }
     
-
+    //UTILIZA DJISKTRA
     public void execute(Grafo g, int ini) {
         Representacao rep = g.getRepresentacao();
         int numVert = rep.getNumVertices();
-
+        //INICIALIZAÇÃO DAS VARIAVEIS
         this.ant = new int[numVert];
         this.vertices = new ArrayList();
         this.valor = new int[numVert];
@@ -40,7 +40,7 @@ public class Caminho {
         No aux;
         this.valor[ini] = 0;
         int atual;
-        while (!this.vertices.isEmpty()) {
+        while (!this.vertices.isEmpty()) {//enquanto ainda ter vertice que não foi verificado
             atual = encontraMenor();
             aux = rep.getAdj(atual);
             cor[atual] = 1;
@@ -56,27 +56,27 @@ public class Caminho {
 
     private int encontraMenor() {
         int menor = Integer.MAX_VALUE;
-        int index = 0;
-        int count = 0;
-
-        for (Integer i : vertices) {
+        int index = 0; //marca o indice de onde esta o vertice com melhor caminho
+        int count = 0; //conta qual indice atual
+        
+        for (Integer i : vertices) { //percorre os vertices que não pertence a solução
             if (valor[i] < menor) {
                 index = count;
                 menor = valor[i];
             }
             count++;
         }
-        int vert = vertices.get(index);
-        vertices.remove(index);
+        int vert = vertices.get(index); //proximo vertice a ser verificado
+        vertices.remove(index); //retira o vertice do conjunto de vertices que não pertencem a solução
         return vert;
 
     }
 
     private void relaxa(int atual, int outro, int peso) {
-        if (valor[atual] == Integer.MAX_VALUE) {
+        if (valor[atual] == Integer.MAX_VALUE) { //soma com max_int da negativo
             return;
         }
-        if (valor[outro] > (valor[atual] + peso)) {
+        if (valor[outro] > (valor[atual] + peso)) { //verifica se o caminho é melhor
             valor[outro] = valor[atual] + peso;
             ant[outro] = atual;
         }

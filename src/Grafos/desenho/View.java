@@ -620,7 +620,6 @@ public class View extends javax.swing.JFrame {
         int compStep = 255 / numComp;
         RainbowScale rbS = new RainbowScale();
         for (int i = 0; i < comp.length; i++) {
-            System.out.println("Vertice: " + i + " Compoente: " + comp[i]);
             this.graph.getVertex().get(i).setColor(rbS.getColor(comp[i] * compStep));
         }
         this.view.cleanImage();

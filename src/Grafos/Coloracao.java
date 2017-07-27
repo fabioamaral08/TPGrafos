@@ -15,20 +15,20 @@ public class Coloracao {
     public void execute(Grafo grafo) {
         Representacao rep = grafo.getRepresentacao();
         cores = new int[rep.getNumVertices()];
+        //INICIALIZA CORES ATUAIS
         for (int i=0; i<cores.length; i++){
             cores[i] = -1;
         }
         int vMaiorGrau = verticeMaiorGrau(rep);
-        System.out.println("Vertice de Maior Grau: " + vMaiorGrau);
         coloreVertice(rep, vMaiorGrau);
     }
 
     private void coloreVertice(Representacao rep, int vert) {
         cores[vert] = corApropriada(rep, vert);
-        No adj = ((ListaAdjacencia) rep).getAdjacentes(vert);
-        while (adj != null) {
-            if (cores[adj.getVertID()] == -1) {
-                coloreVertice(rep, adj.getVertID());
+        No adj = rep.getAdj(vert);
+        while (adj != null) { //enquanto não verificou todos os adjacentes
+            if (cores[adj.getVertID()] == -1) { //se o adjacente não foi colorido
+                coloreVertice(rep, adj.getVertID()); //colore adjacente
             }
             adj = adj.getProx();
         }
@@ -39,11 +39,11 @@ public class Coloracao {
         Boolean flag = false;        
         while (!flag){
             cor++;
-            No adj = ((ListaAdjacencia) rep).getAdjacentes(vert);
-            while (adj!=null && cores[adj.getVertID()] != cor){
+            No adj = rep.getAdj(vert);
+            while (adj!=null && cores[adj.getVertID()] != cor){ //percorre adjacentes e compara as cores;
                 adj = adj.getProx();
             }
-            if (adj == null){
+            if (adj == null){//percorreu todas as adjacencias e não teve cor igual;
                 flag = true;
             }            
         }        
@@ -52,22 +52,23 @@ public class Coloracao {
 
     private int verticeMaiorGrau(Representacao rep){
         int vert = 0;
-        int maior = Integer.MIN_VALUE;
-        for (int i=0; i<rep.getNumVertices(); i++){
+        int maior = -1;
+        int numVert = rep.getNumVertices();
+        for (int i=0; i<numVert; i++){
             int cont = 0;
-            No aux = ((ListaAdjacencia) rep).getAdjacentes(i);
-            while (aux != null){
+            No aux = rep.getAdj(i);
+            while (aux != null){ //percorre adjacencias
                 cont++;
                 aux = aux.getProx();
             }
-            if (cont > maior){
+            if (cont > maior){ //compara com o maior atual
                 maior = cont;
                 vert = i;
             }
         }
         return vert;
     }
-
+    //RECUPERACAO DO RESULTADO
     public int getNumCores(){
         int numComp = 0;
         int count[] = new int[cores.length];

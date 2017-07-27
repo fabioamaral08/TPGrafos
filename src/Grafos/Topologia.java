@@ -60,6 +60,6 @@ public class Topologia {
             
             aux = aux.getProx();
         }
-        this.ordem[this.topo--] = i;
+        this.ordem[this.topo--] = i; //marca no fim do vetor toda vez que termina (pilha)
     }
 }

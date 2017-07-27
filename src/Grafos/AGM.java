@@ -12,37 +12,39 @@ package Grafos;
 public class AGM {
 
     private int numVert;
-    private int[] ant;
+    private int[] ant; //recuperação da arvore
 
     public int[] getAnt() {
         return ant;
     }
 
     public void execute(Grafo g, int vert) {
-        this.numVert = g.getRepresentacao().getNumVertices();
         Representacao rep = g.getRepresentacao();
-        AGMPrimLista(g,vert);
+        this.numVert = rep.getNumVertices();
+        AGMPrim(g,vert, rep);
     }
 
-    public void AGMPrimLista(Grafo g, int vert) {
+    public void AGMPrim(Grafo g, int vert,Representacao rep) {
+       
+        //INICIALIZAÇÃO DOS VETORES E VARIAVEIS
         ant = new int[this.numVert];
         int[] cor = new int[this.numVert];
         int[] valor = new int[this.numVert];
         int fim = this.numVert;
         int atual = vert;
-        No[] list = ((ListaAdjacencia) g.getRepresentacao()).getLista();
-        No aux;
+        No aux; //
         int id;
-        Representacao rep = g.getRepresentacao();
+        //VALORES INICIAIS DOS VETORES
         for (int i = 0; i < this.numVert; i++) {
             ant[i] = -1;
             cor[i] = 0;
             valor[i] = Integer.MAX_VALUE;
         }
         valor[atual] = 0;
+        
         while (fim > 0) {
             cor[atual] = 1;
-            aux = list[atual];
+            aux = rep.getAdj(atual);
             while (aux != null) {
                 id = aux.getVertID();
                 if (cor[id] == 0) {
@@ -55,6 +57,7 @@ public class AGM {
             }
             int min = Integer.MAX_VALUE;
             int proxVert = -1;
+            //PROCURA O CORTE LEVE
             for(int i = 0;i<this.numVert;i++){
                 if(cor[i] == 0){
                     if(valor[i] < min){
@@ -64,7 +67,7 @@ public class AGM {
                 }
             }
             atual = proxVert;
-            fim--;
+            fim--; //decrementa o numero de vertices que não pertencem a solução
         }
 
         
