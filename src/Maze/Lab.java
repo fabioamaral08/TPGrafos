@@ -179,7 +179,7 @@ public class Lab {
         String aux = "";
         for (int i = 0; i < this.lin; i++) {
             for (int j = 0; j < this.col; j++) {
-                aux = aux + this.cells[i][j].caminho(col);
+                aux = aux + this.cells[i][j].checkWalls(col);
             }
         }
         return aux;
@@ -201,7 +201,7 @@ public class Lab {
         JFileChooser dialog = new JFileChooser();
         dialog.setMultiSelectionEnabled(false);
         dialog.setDialogTitle("Save file");
-        //dialog.setCurrentDirectory(new File("D:\\DANILO\\UNESP\\2017\\Aulas\\Grafos"));
+        dialog.setCurrentDirectory(new File("C:\\Users\\fabio\\Desktop\\Aulas\\Grafos\\arq"));
         int result = dialog.showDialog(null, "Salvar");
         if (result == JFileChooser.APPROVE_OPTION) {
             try {
@@ -213,7 +213,7 @@ public class Lab {
                 FileWriter fileW = new FileWriter(arquivo2);//arquivo para escrita
                 BufferedWriter buffW = new BufferedWriter(fileW);
 
-                buffW.write("1\r\n" + numVert + "\r\n" + res);
+                buffW.write("0\r\n" + numVert + "\r\n" + res);
 
                 buffW.close();
             } catch (IOException ex) {

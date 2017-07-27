@@ -92,7 +92,7 @@ public class Edge {
         if (texto && this.peso != 0) {
             drawText(g2, new Point((int) source.getX(), (int) source.getY()),
                     new Point((int) target.getX(), (int) target.getY()),
-                    Integer.toString(this.peso), 80);
+                    Integer.toString(this.peso), 75);
         }
 
         g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 1.0f));
@@ -169,16 +169,17 @@ public class Edge {
     //experimental --- precisa melhorar para quando o angulo é negativo
     private void drawText(Graphics2D g2, Point s, Point t, String text, int deslocamento) {
         float r = (float) Math.sqrt(Math.pow(s.x - t.x, 2) + Math.pow(s.y - t.y, 2));
-        float cos = (t.x - s.x) / r;
-        float sen = (t.y - s.y) / r;
+        float cos = (t.x - s.x) / r*0.5f;
+        float sen = (t.y - s.y) / r*0.5f;
 
-        Point pc = new Point(Math.round(deslocamento * -cos) + t.x, Math.round(deslocamento * -sen) + t.y);
+        Point pc = new Point(Math.round(deslocamento * -cos) + t.x, Math.round(deslocamento * -sen)+ t.y);
 
         g2.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
         g2.setColor(Color.BLACK);
         //g2.rotate(Math.acos(cos), pc.x, pc.y);
         g2.drawString(text, pc.x, pc.y);
         //g2.rotate(-Math.acos(cos), pc.x, pc.y);
+         
     }
 
     private void drawArrow(Graphics2D g2, Point s, Point t, float size) {

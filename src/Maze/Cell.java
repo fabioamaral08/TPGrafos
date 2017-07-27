@@ -60,24 +60,20 @@ public class Cell {
         this.paredes[i] = false;
     }
 
-    public String caminho(int col) {
+    public String checkWalls(int col) {
         String aux = "";
         String ID = Integer.toString(this.linha * col + this.coluna);
-        for (int i = 0; i < 4; i++) {
+        for (int i = 1; i < 3; i++) {
             if (!this.paredes[i]) {
                 switch (i) {
-                    case 0:
-                        aux += ID + " " + Integer.toString((this.linha - 1) * col + this.coluna) + " 0\r\n";
-                        break;
+
                     case 1:
-                        aux += ID + " " + Integer.toString((this.linha) * col + (this.coluna + 1)) + " 0\r\n";
+                        aux += ID + " " + Integer.toString((this.linha) * col + (this.coluna + 1)) + " " + Integer.toString(col) + "\r\n";
                         break;
                     case 2:
-                        aux += ID + " " + Integer.toString((this.linha + 1) * col + this.coluna) + " 0\r\n";
+                        aux += ID + " " + Integer.toString((this.linha + 1) * col + this.coluna) + " " + Integer.toString(col) + "\r\n";
                         break;
-                    case 3:
-                        aux += ID + " " + Integer.toString((this.linha) * col + this.coluna - 1) + " 0\r\n";
-                        break;
+
                 }
             }
         }

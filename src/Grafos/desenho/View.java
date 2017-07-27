@@ -12,6 +12,7 @@ package Grafos.desenho;
 
 import Grafos.AGM;
 import Grafos.BuscaLargura;
+import Grafos.Caminho;
 import Grafos.Coloracao;
 import Grafos.ComponentesConexas;
 import Grafos.Conectividade;
@@ -59,7 +60,7 @@ public class View extends javax.swing.JFrame {
         //this.view.setGraph(this.graph);
         initComponents();
         this.m_algoritmos.setEnabled(false);
-        this.m_aplicacao.setEnabled(false);
+        this.mi_maze.setEnabled(false);
         this.mi_salvarImagem.setEnabled(false);
     }
 
@@ -113,6 +114,10 @@ public class View extends javax.swing.JFrame {
         lb_gerar = new javax.swing.JLabel();
         tf_gerar = new javax.swing.JTextField();
         bt_gerar = new javax.swing.JButton();
+        p_caminho = new javax.swing.JPanel();
+        bt_caminho = new javax.swing.JButton();
+        tf_caminho = new javax.swing.JTextField();
+        lb_caminho = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         m_opcoes = new javax.swing.JMenu();
         mi_carregarGrafo = new javax.swing.JMenuItem();
@@ -321,6 +326,43 @@ public class View extends javax.swing.JFrame {
 
         p_thePanel.add(p_gerar, "cardGerar");
 
+        p_caminho.setBorder(javax.swing.BorderFactory.createTitledBorder("Busca em Largura"));
+
+        bt_caminho.setText("Buscar");
+        bt_caminho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_caminhoActionPerformed(evt);
+            }
+        });
+
+        lb_caminho.setText("Vértice Inicial:");
+
+        javax.swing.GroupLayout p_caminhoLayout = new javax.swing.GroupLayout(p_caminho);
+        p_caminho.setLayout(p_caminhoLayout);
+        p_caminhoLayout.setHorizontalGroup(
+            p_caminhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_caminhoLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(lb_caminho)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tf_caminho, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 349, Short.MAX_VALUE)
+                .addComponent(bt_caminho)
+                .addGap(60, 60, 60))
+        );
+        p_caminhoLayout.setVerticalGroup(
+            p_caminhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(p_caminhoLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(p_caminhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_caminho, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_caminho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_caminho))
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+
+        p_thePanel.add(p_caminho, "cardCaminho");
+
         m_opcoes.setText("Opções");
 
         mi_carregarGrafo.setText("Carregar Grafo");
@@ -525,7 +567,7 @@ public class View extends javax.swing.JFrame {
 
                 }
                 this.m_algoritmos.setEnabled(true);
-                this.m_aplicacao.setEnabled(true);
+                this.mi_maze.setEnabled(true);
                 this.mi_salvarImagem.setEnabled(true);
 
                 this.ap = false;
@@ -687,7 +729,7 @@ public class View extends javax.swing.JFrame {
 
     private void mi_caminhoMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_caminhoMinActionPerformed
         CardLayout card = (CardLayout) p_thePanel.getLayout();
-        card.show(p_thePanel, "cardVazio");
+        card.show(p_thePanel, "cardCaminho");
         this.ap = false;
     }//GEN-LAST:event_mi_caminhoMinActionPerformed
 
@@ -810,13 +852,37 @@ public class View extends javax.swing.JFrame {
         this.ap = true;
         this.caminhoToggle.setSelected(true);
         this.paredeToggle.setSelected(true);
-        this.col = Integer.valueOf(JOptionPane.showInputDialog(this, "Numero de colunas do labirinto:"));
+        this.col = this.grafo.getRepresentacao().getAdj(0).getPeso();
         this.graph.computeMazePosition(col);
 
         this.view.setGraph(this.graph);
         this.view.cleanImage();
         this.view.repaint();
     }//GEN-LAST:event_mi_mazeActionPerformed
+
+    private void bt_caminhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_caminhoActionPerformed
+        int ini;
+        this.graph = this.backUpGraph.clone();
+        Caminho caminho = new Caminho();
+        try {
+            ini = Integer.valueOf(this.tf_caminho.getText());
+            if (ini < 0 || ini >= this.grafo.getRepresentacao().getNumVertices()) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Numero Inválido");
+            return;
+        }
+        caminho.execute(grafo, ini);
+
+        int[] ant = caminho.getAnt();
+
+        this.graph.buscaLargura(ant);
+
+        this.view.setGraph(this.graph);
+        this.view.cleanImage();
+        this.view.repaint();
+    }//GEN-LAST:event_bt_caminhoActionPerformed
 
     public class ViewPanel extends JPanel {
 
@@ -862,7 +928,7 @@ public class View extends javax.swing.JFrame {
 
                 g2Buffer.dispose();
             }
-            
+
             if (this.imageBuffer != null) {
                 g2.drawImage(this.imageBuffer, 0, 0, null);
             }
@@ -960,8 +1026,6 @@ public class View extends javax.swing.JFrame {
             this.repaint();
         }
 
-        
-
         @Override
         public void setFont(java.awt.Font font) {
             //
@@ -986,7 +1050,7 @@ public class View extends javax.swing.JFrame {
         private ArrayList<Vertex> selectedVertices;
         //The image which will be drawn as a graph
         private BufferedImage imageBuffer;
-        
+
     }
     private ViewPanel view;
     private Graph graph;
@@ -999,10 +1063,12 @@ public class View extends javax.swing.JFrame {
     private int col;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_busca;
+    private javax.swing.JButton bt_caminho;
     private javax.swing.JButton bt_gerar;
     private javax.swing.JButton bt_goMaze;
     private javax.swing.JToggleButton caminhoToggle;
     private javax.swing.JLabel lb_busca;
+    private javax.swing.JLabel lb_caminho;
     private javax.swing.JLabel lb_entradaMaze;
     private javax.swing.JLabel lb_gerar;
     private javax.swing.JLabel lb_saidaMaze;
@@ -1028,12 +1094,14 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem mi_transposta;
     private javax.swing.JPanel p_Vazio;
     private javax.swing.JPanel p_busca;
+    private javax.swing.JPanel p_caminho;
     private javax.swing.JPanel p_gerar;
     private javax.swing.JPanel p_maze;
     private javax.swing.JPanel p_thePanel;
     private javax.swing.JToggleButton paredeToggle;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTextField tf_busca;
+    private javax.swing.JTextField tf_caminho;
     private javax.swing.JTextField tf_gerar;
     private javax.swing.JTextField tf_xEntradaMaze;
     private javax.swing.JTextField tf_xSaidaMaze;
