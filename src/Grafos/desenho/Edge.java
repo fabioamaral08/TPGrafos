@@ -55,15 +55,15 @@ public class Edge {
         //Combines the color of the two vertex to paint the edge
 
         if (selected) {
-            g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 1.0f));
-            g2.setStroke(new java.awt.BasicStroke(3.0f));
+            //g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 1.0f));
+            g2.setStroke(new java.awt.BasicStroke(3.5f));
         } else {
             g2.setStroke(new java.awt.BasicStroke(1.0f));
-            if ((this.target.isSelected() && this.source.isSelected())) { //se os vertices estao selecionados
-                g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 0.5f));
-            } else {//se os vertices nao estao selecionados
-                g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 0.2f));
-            }
+//            if ((this.target.isSelected() && this.source.isSelected())) { //se os vertices estao selecionados
+//                g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 0.5f));
+//            } else {//se os vertices nao estao selecionados
+//                g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 0.2f));
+//            }
         }
         if (!texto && this.selected) {
             this.color = Color.RED;
@@ -73,8 +73,11 @@ public class Edge {
                     (this.source.getColor().getGreen() + this.target.getColor().getGreen()) / 2,
                     (this.source.getColor().getBlue() + this.target.getColor().getBlue()) / 2);
         }
-        g2.setColor(this.color);
-
+        if (selected) {
+            g2.setColor(Color.RED);
+        } else {
+            g2.setColor(this.color);
+        }
         g2.drawLine(((int) this.source.getX()), ((int) this.source.getY()),
                 ((int) this.target.getX()), ((int) this.target.getY()));
         g2.setStroke(new java.awt.BasicStroke(1.0f));
@@ -169,17 +172,17 @@ public class Edge {
     //experimental --- precisa melhorar para quando o angulo é negativo
     private void drawText(Graphics2D g2, Point s, Point t, String text, int deslocamento) {
         float r = (float) Math.sqrt(Math.pow(s.x - t.x, 2) + Math.pow(s.y - t.y, 2));
-        float cos = (t.x - s.x) / r*0.5f;
-        float sen = (t.y - s.y) / r*0.5f;
+        float cos = (t.x - s.x) / r * 0.5f;
+        float sen = (t.y - s.y) / r * 0.5f;
 
-        Point pc = new Point(Math.round(deslocamento * -cos) + t.x, Math.round(deslocamento * -sen)+ t.y);
+        Point pc = new Point(Math.round(deslocamento * -cos) + t.x, Math.round(deslocamento * -sen) + t.y);
 
         g2.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
         g2.setColor(Color.BLACK);
         //g2.rotate(Math.acos(cos), pc.x, pc.y);
         g2.drawString(text, pc.x, pc.y);
         //g2.rotate(-Math.acos(cos), pc.x, pc.y);
-         
+
     }
 
     private void drawArrow(Graphics2D g2, Point s, Point t, float size) {
