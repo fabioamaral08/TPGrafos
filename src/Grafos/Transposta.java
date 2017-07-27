@@ -11,23 +11,23 @@ package Grafos;
  */
 public class Transposta {
 
-    private Grafo Transposto;
+    private Grafo Transposto;                                                   // CRIA GRAFO "Transposto"
 
-    public void execute(Grafo g) {
+    public void execute(Grafo g) {                                              //
 
-        Representacao Grep = g.getRepresentacao();
-        Representacao GTrep = new ListaAdjacencia();
+        Representacao Grep = g.getRepresentacao();                              //"Grep" RECEBE REPRESENTAÇÃO DO GRAFO
+        Representacao GTrep = new ListaAdjacencia();                            //"GTrep" RECEBERÁ O GRAFO TRANSPOSTO DE "Grep"
 
-        int numVert = Grep.getNumVertices();
-        Transposto = new Grafo(numVert, 1, GTrep);
+        int numVert = Grep.getNumVertices();                                    //numVert RECEBE O NÚMERO DE VERTICES DE "Grep"
+        Transposto = new Grafo(numVert, 1, GTrep);                              
 
         No aux;
 
-        for (int i = 0; i < numVert; i++) {                                       // ENQUANTO NÃO PERCORRER TODOS OS VÉRTICES
+        for (int i = 0; i < numVert; i++) {                                     // ENQUANTO NÃO PERCORRER TODOS OS VÉRTICES
             aux = Grep.getAdj(i);                                               // AUX RECEBE ADJACENCIA ATUAL
-            while (aux != null) {                                                 // ENQUANTO NÃO ACABAR ADJACÊNCIA
-                this.Transposto.addAresta(aux.getVertID(), i, aux.getPeso());            // INSERE TRANSPOSTO NA REPRESENTAÇÃO
-                aux = aux.getProx();
+            while (aux != null) {                                               // ENQUANTO NÃO ACABAR ADJACÊNCIA
+                this.Transposto.addAresta(aux.getVertID(), i, aux.getPeso());   // INSERE TRANSPOSTO NA REPRESENTAÇÃO
+                aux = aux.getProx();                                            // PEGA PROX AUX
 
             }
         }
@@ -38,5 +38,5 @@ public class Transposta {
         return Transposto;
     }
 
-    //lol
+   
 }
