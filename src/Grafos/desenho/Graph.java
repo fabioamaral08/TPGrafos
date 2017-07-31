@@ -168,7 +168,6 @@ public class Graph extends Object implements Cloneable {
         int nVert = this.vertex.size();
         int step = 100;
         int deslocX = 50;
-        int deslocY = 100;
         for (int i = 0; i < nVert; i++) {
             double pos = i * step;
 

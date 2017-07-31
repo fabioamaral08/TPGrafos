@@ -55,23 +55,15 @@ public class Edge {
         //Combines the color of the two vertex to paint the edge
 
         if (selected) {
-            //g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 1.0f));
             g2.setStroke(new java.awt.BasicStroke(3.5f));
         } else {
             g2.setStroke(new java.awt.BasicStroke(1.0f));
-//            if ((this.target.isSelected() && this.source.isSelected())) { //se os vertices estao selecionados
-//                g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 0.5f));
-//            } else {//se os vertices nao estao selecionados
-//                g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 0.2f));
-//            }
         }
         if (!texto && this.selected) {
             this.color = Color.RED;
 
         } else {
-            this.color = new Color((this.source.getColor().getRed() + this.target.getColor().getRed()) / 2,
-                    (this.source.getColor().getGreen() + this.target.getColor().getGreen()) / 2,
-                    (this.source.getColor().getBlue() + this.target.getColor().getBlue()) / 2);
+            this.color = Color.black;
         }
         if (selected) {
             g2.setColor(Color.RED);
@@ -83,10 +75,6 @@ public class Edge {
         g2.setStroke(new java.awt.BasicStroke(1.0f));
 
         if (isDirected()) {
-//            drawArrow(g2, new Point((int) source.getX(), (int) source.getY()),
-//                    new Point((int) target.getX(), (int) target.getY()),
-//                    6.0f);
-
             drawArrowNew(g2, new Point((int) source.getX(), (int) source.getY()),
                     new Point((int) target.getX(), (int) target.getY()),
                     6, 14);
@@ -130,16 +118,6 @@ public class Edge {
                 dist, 100, 0, 180 * inter);
         g2.setStroke(new java.awt.BasicStroke(1.0f));
 
-//        if (isDirected()) {
-////            drawArrow(g2, new Point((int) source.getX(), (int) source.getY()),
-////                    new Point((int) target.getX(), (int) target.getY()),
-////                    6.0f);
-//
-//            drawArrowNew(g2, new Point((int) target.getX(), (int) target.getY()-(2*inter)),
-//                    new Point((int) target.getX(), (int) target.getY()),
-//                    6, 14);
-//
-//        }
         g2.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
         g2.setColor(Color.BLACK);
         if (inter == 1) {
